@@ -6,8 +6,52 @@ Template detalhado por sessão (quando necessário): `docs/01-governance/cursor-
 
 ---
 
+## HANDOFF — 2026-05-14 — Agent Setup/Environment
+
+### Declaração
+- Atuei como: Agent Setup/Environment  
+- Sprint / escopo: Git inicial no disco + orientação para GitHub privado `desafio_rpg_leega`  
+- Rules consultadas: `.cursor/rules/_dispatcher.mdc`, `docs/01-governance/cursor-workflow.md`  
+- Arquivos tocados: apenas histórico Git local (`.git/`), commit raiz no projeto existente; **HANDOFF.md** (esta entrada)  
+- Não toquei: código de backend/engine/frontend além do que já estava versionado pelo primeiro commit  
+
+### O que fiz
+- `git init -b main`, staging completo respeitando `.gitignore`, commit inicial (**132 arquivos**).  
+- GitHub CLI **não** estava no PATH; `winget install GitHub.cli` (incl. `--silent`) continua a terminar em **exit 1602** (MSI “cancelado” — comum com UAC/política).  
+- **GitHub CLI portátil** extraído para `%LOCALAPPDATA%\Programs\gh-portable\bin\gh.exe` (release `gh_2.92.0_windows_amd64.zip` em [cli/cli releases](https://github.com/cli/cli/releases)) — evita o instalador MSI.  
+- Tentativa `gh auth login --web` nesta máquina: fluxo device aberto, **login ainda não concluído** na sessão automatizada (`gh auth status` sem host).  
+
+### O que falta / próximo passo humano
+**Opção A (recomendada):** no **PowerShell teu** (para concluir o browser / device flow), na pasta do projeto:
+
+```powershell
+Set-Location "c:\Users\dpfreitas\Desktop\Desagio_RPG_Leega"
+$gh = "$env:LOCALAPPDATA\Programs\gh-portable\bin\gh.exe"
+& $gh auth login -h github.com -p https -w --skip-ssh-key
+& $gh repo create desafio_rpg_leega --private --source=. --remote=origin --push
+```
+
+- Se `repo create` disser que o repositório já existe: `git remote remove origin` (se aplicável), depois `git remote add origin https://github.com/SEU_LOGIN/desafio_rpg_leega.git` e `git push -u origin main`.  
+- Antes do push, faça commit do que estiver pendente (ex.: alterações neste **HANDOFF**).  
+
+**Opção B:** criar manualmente no site o repo vazio privado **`desafio_rpg_leega`** (sem README) e só então:
+
+```powershell
+Set-Location "c:\Users\dpfreitas\Desktop\Desagio_RPG_Leega"
+git remote add origin https://github.com/SEU_LOGIN/desafio_rpg_leega.git
+git push -u origin main
+```
+
+**(Opcional)** Autor Git global: `git config --global user.name "..."` e `git config --global user.email "..."`; para corrigir só o commit raiz antes do primeiro push: `git commit --amend --reset-author`.  
+
+### Evidências
+- Branch `main`, commit raiz presente localmente (`git log -1 --oneline`).  
+
+---
+
 ## Estado atual (2026-05-14)
 
+- **Git local:** repositório inicializado nesta pasta (`main`), primeiro commit local pronto para `git push` após criar o remoto privado **`desafio_rpg_leega`** (instruções na sessão HANDOFF acima).  
 - **Repositório:** backend com `GET /api/health` + persistência SQLite + **fluxo jogável** (`POST /api/sessions/{id}/choices` integrado à `engine.apply_choice`, ranking gravado ao fim da partida) + **leaderboard público** (`GET /api/ranking?limit=10` da Sprint 2.3, envelope `{items, limit, count}`, `session_id` ocultado). Frontend healthcheck sem alterações nesta linha 2.x (Vite/React fica igual). Catálogo `events.json` intacto na pasta da engine — validado no boot (`validate_events`).
 - **Última sprint executável fechada tecnicamente:** Sprint **2.3** — Ranking API + smoke tests (`docs/03-validation/audits/sprint-2.3.md`). 9 testes novos (incluindo smoke fim-a-fim que joga até `demitido` e verifica entrada no ranking). 116/116 pytest verdes.
 - **Sprint 2.2** continua intacta — `POST /choices` + engine + persistência (`docs/03-validation/audits/sprint-2.2.md`); estado da engine hidratado de SQLite via `secrets_seen_json` + histórico de `Decision`.
