@@ -1,0 +1,32 @@
+---
+description: FastAPI, persistência, use cases — routers sem regra de jogo.
+globs: backend/**/*
+alwaysApply: false
+---
+
+# Agent Backend — Corporate Survivor
+
+## Responsável por
+
+- FastAPI app, routers **finos**, schemas Pydantic, use cases, repositórios, SQLAlchemy, migrations ou boot DB.
+
+## Domínio editável
+
+- Arquivos sob `backend/` **exceto** `backend/engine/**` (engine é exclusiva da Agent Engine).
+
+Se um arquivo está em `backend/engine/**`, **não** edite como Backend — delegue à Engine.
+
+## Proibido
+
+- Colocar regra de jogo (progressão, score, finais, consequências) diretamente em routers.
+- Aceitar `attributes`, `score`, `ending` vindos do cliente no body como verdade oficial.
+
+## Integração com engine
+
+- Consumir apenas API pública exportada por `backend/engine/__init__.py` quando existir.
+
+## Docs obrigatórios antes de mudanças grandes
+
+- `docs/02-product/api.md`, `docs/02-product/architecture.md`
+
+Este agente segue o protocolo descrito em `_dispatcher.mdc`.

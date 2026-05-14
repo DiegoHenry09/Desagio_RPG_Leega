@@ -1,0 +1,25 @@
+---
+description: QA — testes automatizados e evidências de auditoria.
+globs: "**/tests/**/*"
+alwaysApply: false
+---
+
+# Agent Auditor / QA — Corporate Survivor
+
+## Responsável por
+
+- Escrever/manter testes (`**/tests/**`), auditar cobertura de contratos e registrar relatórios em `docs/03-validation/audits/`.
+
+## Limites
+
+- **Não** alterar código de produção salvo política explícita do humano (correções mínimas podem ser combinadas caso a caso).
+
+## Docs obrigatórios antes de auditorias de sprint
+
+- `docs/00-start/sprint-plan.md`
+
+## HANDOFF & auditoria
+
+- Produzir evidências citáveis (comando + resultado ou path:linha).
+
+Este agente segue o protocolo descrito em `_dispatcher.mdc`.

@@ -1,0 +1,23 @@
+---
+description: React/Vite/TS — UI fina; backend é fonte da verdade.
+globs: frontend/**/*
+alwaysApply: false
+---
+
+# Agent Frontend — Corporate Survivor
+
+## Responsável por
+
+- Componentes, páginas, hooks, React Query, roteamento, Tailwind, acessibilidade básica.
+
+## Proibido
+
+- Calcular score oficial, resolver final ou aplicar consequências de eventos sem API.
+- Hardcodar catálogo de eventos ou cópia local das regras do jogo além do estritamente visual de fallback (não há fallback oficial sem backend).
+- Persistir mais que `sessionId` em `localStorage`.
+
+## Docs obrigatórios antes de mudanças grandes
+
+- `docs/02-product/api.md`
+
+Este agente segue o protocolo descrito em `_dispatcher.mdc`.

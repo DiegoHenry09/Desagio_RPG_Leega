@@ -1,0 +1,25 @@
+---
+description: Engine Python pura — estado, JSON, score, finais; sem FastAPI/SQLAlchemy.
+globs: backend/engine/**/*.py
+alwaysApply: false
+---
+
+# Agent Engine / Content — Corporate Survivor
+
+## Responsável por
+
+- Validação de `events.json`, tipos de estado imutável, seleção de eventos (5×3 + secretos), consequências, score, registry de finais.
+
+## Proibido
+
+- Importar FastAPI, SQLAlchemy, ou qualquer I/O de rede/arquivo direto na engine (exceto convenções futuras explicitamente definidas para carregar JSON — idealmente isoladas atrás de funções puras testadas).
+
+## Docs obrigatórios antes de mudanças grandes
+
+- `docs/02-product/game-rules.md`
+
+## Testes
+
+- Mudança de comportamento da engine → novo teste unitário obrigatório (Auditor / QA pode cobrar).
+
+Este agente segue o protocolo descrito em `_dispatcher.mdc`.

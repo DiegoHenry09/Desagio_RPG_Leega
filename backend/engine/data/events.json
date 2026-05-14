@@ -1,0 +1,471 @@
+{
+  "schemaVersion": "1.0",
+  "events": [
+    {
+      "id": "ev_day1_001",
+      "isMain": true,
+      "day": 1,
+      "sequence": 1,
+      "title": "Onboarding com RH",
+      "scene": "O RH reservou a sala de reunião grande para a apresentação de boas-vindas. São oito trainees novos sentados em volta da mesa oval. A apresentadora projeta o slide de cultura da empresa. A apresentação está marcada para durar duas horas e quinze minutos.",
+      "tags": ["social", "aprendizado"],
+      "options": [
+        {
+          "id": "A",
+          "label": "Tomar notas detalhadas em um caderno.",
+          "consequences": { "aprendizado": 2, "energia": -1 }
+        },
+        {
+          "id": "B",
+          "label": "Aproveitar as pausas para conversar com os outros trainees.",
+          "consequences": { "networking": 2, "ansiedade": 1, "aprendizado": -1 }
+        },
+        {
+          "id": "C",
+          "label": "Levantar a mão quando abrem espaço para perguntar sobre benefícios e horário flexível.",
+          "consequences": { "reputacao": 1, "networking": -1, "ansiedade": 1 }
+        }
+      ]
+    },
+    {
+      "id": "ev_day1_002",
+      "isMain": true,
+      "day": 1,
+      "sequence": 2,
+      "title": "O primeiro almoço",
+      "scene": "Meio-dia. Três pessoas do seu time direto aparecem na sua mesa. \"Vamos almoçar? Tem um japonês legal aqui perto, é mais caro mas vale.\" Você não conhece ninguém ainda. O almoço cabe no seu orçamento, mas com aperto.",
+      "tags": ["social", "networking"],
+      "options": [
+        {
+          "id": "A",
+          "label": "Aceitar o convite e ir junto.",
+          "consequences": { "networking": 2, "energia": -1, "ansiedade": 1 }
+        },
+        {
+          "id": "B",
+          "label": "Agradecer e dizer que precisa resolver algo, vai sozinho a algo mais simples.",
+          "consequences": { "energia": 1, "networking": -2 }
+        },
+        {
+          "id": "C",
+          "label": "Ir junto mas pedir só uma entrada para gastar menos.",
+          "consequences": { "networking": 1, "ansiedade": 2 }
+        }
+      ]
+    },
+    {
+      "id": "ev_day1_003",
+      "isMain": true,
+      "day": 1,
+      "sequence": 3,
+      "title": "Setup pendente",
+      "scene": "A TI ainda não liberou seus acessos críticos. Você tem três horas até o fim do expediente sem conseguir fazer nada do que foi previsto. Seu gestor está em reunião e não pode te atender agora.",
+      "tags": ["entrega", "autonomia"],
+      "options": [
+        {
+          "id": "A",
+          "label": "Procurar a documentação interna no Confluence/Notion e começar a estudar.",
+          "consequences": { "aprendizado": 2, "produtividade": 1, "energia": -1 }
+        },
+        {
+          "id": "B",
+          "label": "Mandar uma mensagem objetiva para o gestor avisando dos bloqueios e o que vai fazer enquanto isso.",
+          "consequences": { "reputacao": 2, "ansiedade": 1, "energia": -1 }
+        },
+        {
+          "id": "C",
+          "label": "Esperar a TI resolver. Aproveitar para descansar disfarçado.",
+          "consequences": { "energia": 2, "reputacao": -2, "aprendizado": -1 }
+        }
+      ]
+    },
+    {
+      "id": "ev_day2_001",
+      "isMain": true,
+      "day": 2,
+      "sequence": 1,
+      "title": "Tarefa de escopo vago",
+      "scene": "Seu gestor te chama: \"Toma, dá uma estudada nesse caso e me devolve um resumo executivo até amanhã.\" Ele te encaminha um documento de 40 páginas sem dizer o que considera um bom resumo, nem quem é o público.",
+      "tags": ["entrega", "comunicacao"],
+      "options": [
+        {
+          "id": "A",
+          "label": "Pedir 15 minutos de alinhamento para entender o público e o nível de detalhe esperado.",
+          "consequences": { "reputacao": 2, "produtividade": 1, "energia": -1 }
+        },
+        {
+          "id": "B",
+          "label": "Começar a ler e fazer um resumo bem-feito que cobre tudo, deduzindo o escopo.",
+          "consequences": { "produtividade": 2, "energia": -2, "ansiedade": 1 }
+        },
+        {
+          "id": "C",
+          "label": "Perguntar a um trainee mais antigo ou colega o que ele costuma entregar pro gestor.",
+          "consequences": { "networking": 1, "aprendizado": 1, "reputacao": -1 }
+        }
+      ]
+    },
+    {
+      "id": "ev_day2_002",
+      "isMain": true,
+      "day": 2,
+      "sequence": 2,
+      "title": "Duas urgências",
+      "scene": "14h30. Sua colega de outro time vem na sua mesa e pede um favor \"rapidinho\" que vai tomar uma hora sua. Cinco minutos depois, seu gestor manda mensagem pedindo um ajuste em algo que você já entregou. Os dois estão te olhando.",
+      "tags": ["pressao", "priorizacao"],
+      "options": [
+        {
+          "id": "A",
+          "label": "Avisar a colega que você vai priorizar a demanda do gestor e refazer o ajuste primeiro.",
+          "consequences": { "reputacao": 1, "networking": -2 }
+        },
+        {
+          "id": "B",
+          "label": "Responder ao gestor: \"vou priorizar — me dá 1h\" e cuidar dele primeiro.",
+          "consequences": { "reputacao": 1, "networking": -1, "energia": -1 }
+        },
+        {
+          "id": "C",
+          "label": "Tentar fazer os dois em paralelo, alternando entre as duas tarefas.",
+          "consequences": { "produtividade": -1, "energia": -2, "ansiedade": 3 }
+        }
+      ]
+    },
+    {
+      "id": "ev_day2_003",
+      "isMain": true,
+      "day": 2,
+      "sequence": 3,
+      "title": "Crítica pública em reunião",
+      "scene": "Na daily, alguém sênior comenta em voz alta sobre o documento que você entregou: \"tá bem cru, dá pra ver que faltou contexto.\" A sala fica em silêncio. As pessoas estão te olhando.",
+      "tags": ["pressao", "reputacao", "aprendizado"],
+      "options": [
+        {
+          "id": "A",
+          "label": "Reconhecer publicamente, perguntar quais pontos especificamente faltaram e anotar.",
+          "consequences": { "aprendizado": 3, "reputacao": 2, "ansiedade": 2 }
+        },
+        {
+          "id": "B",
+          "label": "Defender o trabalho explicando as restrições de tempo que você teve.",
+          "consequences": { "reputacao": 1, "networking": -1, "ansiedade": 1 }
+        },
+        {
+          "id": "C",
+          "label": "Concordar em silêncio, agradecer e dizer que vai refazer.",
+          "consequences": { "energia": -1, "reputacao": -1, "aprendizado": 1 }
+        }
+      ]
+    },
+    {
+      "id": "ev_day3_001",
+      "isMain": true,
+      "day": 3,
+      "sequence": 1,
+      "title": "Reunião sem pauta",
+      "scene": "Convite no calendário: \"Alinhamento — 1h\". Sem agenda, sem descrição, sem documento prévio. Onze participantes. Começa em cinco minutos.",
+      "tags": ["reuniao", "foco"],
+      "options": [
+        {
+          "id": "A",
+          "label": "Entrar com notebook fechado, prestar atenção e tomar notas.",
+          "consequences": { "aprendizado": 1, "energia": -1 }
+        },
+        {
+          "id": "B",
+          "label": "Logo no início, perguntar educadamente qual é o objetivo da reunião e o que se espera dela.",
+          "consequences": { "reputacao": 2, "networking": -1, "ansiedade": 1 }
+        },
+        {
+          "id": "C",
+          "label": "Levar trabalho paralelo discretamente para fazer durante a reunião.",
+          "consequences": { "produtividade": 1, "reputacao": -2 }
+        }
+      ]
+    },
+    {
+      "id": "ev_day3_002",
+      "isMain": true,
+      "day": 3,
+      "sequence": 2,
+      "title": "Convite para happy hour",
+      "scene": "Final do dia. \"Galera vai no bar de sempre amanhã depois do trabalho, vem com a gente?\" É um momento informal real do time. Você está cansado e tem que acordar cedo na sexta.",
+      "tags": ["social", "networking", "energia"],
+      "options": [
+        {
+          "id": "A",
+          "label": "Aceitar e ir junto.",
+          "consequences": { "networking": 3, "energia": -2, "ansiedade": 1 }
+        },
+        {
+          "id": "B",
+          "label": "Recusar dizendo que já tem compromisso pessoal.",
+          "consequences": { "energia": 1, "networking": -2 }
+        },
+        {
+          "id": "C",
+          "label": "Aceitar mas avisar que sai antes das 22h.",
+          "consequences": { "networking": 1, "energia": -1 }
+        },
+        {
+          "id": "D",
+          "label": "Aceitar e oferecer carona para quem mora do seu lado.",
+          "requires": { "min_attrs": { "reputacao": 6 } },
+          "consequences": { "networking": 3, "reputacao": 1, "energia": -2 }
+        }
+      ]
+    },
+    {
+      "id": "ev_day3_003",
+      "isMain": true,
+      "day": 3,
+      "sequence": 3,
+      "title": "Pedido de última hora",
+      "scene": "18h02. Mensagem do gestor: \"Rapidinho, consegue subir isso hoje?\" Você já está saindo. Não está claro o tamanho do \"isso\". Sua família te espera para jantar.",
+      "tags": ["pressao", "limites", "reputacao"],
+      "options": [
+        {
+          "id": "A",
+          "label": "Responder \"claro, pode deixar comigo\" e ficar até resolver.",
+          "consequences": { "produtividade": 2, "energia": -3, "ansiedade": 1, "reputacao": 1 }
+        },
+        {
+          "id": "B",
+          "label": "Responder \"consigo amanhã cedo com mais segurança, ok?\"",
+          "consequences": { "reputacao": 1, "produtividade": -1, "ansiedade": -1 }
+        },
+        {
+          "id": "C",
+          "label": "Pedir mais contexto antes de aceitar: \"qual o escopo exato e até que hora vc precisa?\"",
+          "consequences": { "aprendizado": 2, "reputacao": 1 }
+        },
+        {
+          "id": "D",
+          "label": "Não responder agora e responder amanhã de manhã.",
+          "consequences": { "energia": 1, "reputacao": -3 }
+        }
+      ]
+    },
+    {
+      "id": "ev_day4_001",
+      "isMain": true,
+      "day": 4,
+      "sequence": 1,
+      "title": "Mentoria oferecida",
+      "scene": "Uma pessoa sênior do time, com quase 10 anos de empresa, te chama e oferece 30 minutos no fim do dia \"se você quiser tirar dúvidas, eu lembro como é começar aqui.\"",
+      "tags": ["aprendizado", "networking", "carreira"],
+      "options": [
+        {
+          "id": "A",
+          "label": "Aceitar e dedicar uma hora antes da reunião preparando perguntas concretas.",
+          "consequences": { "aprendizado": 3, "networking": 2, "energia": -2 }
+        },
+        {
+          "id": "B",
+          "label": "Aceitar mas chegar sem se preparar; deixar a conversa fluir.",
+          "consequences": { "aprendizado": 1, "networking": 1, "reputacao": -1 }
+        },
+        {
+          "id": "C",
+          "label": "Agradecer mas recusar dizendo que está cheio de coisa essa semana.",
+          "consequences": { "energia": 1, "networking": -2, "aprendizado": -1 }
+        }
+      ]
+    },
+    {
+      "id": "ev_day4_002",
+      "isMain": true,
+      "day": 4,
+      "sequence": 2,
+      "title": "Erro descoberto",
+      "scene": "Você descobre que aquela entrega de terça tinha um erro factual. Ninguém percebeu ainda, mas alguém pode perceber a qualquer momento. O erro é seu.",
+      "tags": ["entrega", "reputacao", "honestidade"],
+      "options": [
+        {
+          "id": "A",
+          "label": "Avisar o gestor proativamente, mostrar o problema e já trazer a correção.",
+          "consequences": { "reputacao": 3, "ansiedade": 1, "aprendizado": 1 }
+        },
+        {
+          "id": "B",
+          "label": "Corrigir em silêncio e torcer para ninguém perceber o original.",
+          "consequences": { "ansiedade": 2 }
+        },
+        {
+          "id": "C",
+          "label": "Esperar para ver se alguém aponta antes de agir.",
+          "consequences": { "ansiedade": 3, "reputacao": -2 }
+        }
+      ]
+    },
+    {
+      "id": "ev_day4_003",
+      "isMain": true,
+      "day": 4,
+      "sequence": 3,
+      "title": "Pedido de feedback",
+      "scene": "Sua gerente direta te chama: \"Como você tá vendo a semana? Quero feedback honesto do onboarding — o que tá funcionando e o que tá ruim.\"",
+      "tags": ["comunicacao", "reputacao", "aprendizado"],
+      "options": [
+        {
+          "id": "A",
+          "label": "Dar feedback estruturado com dois pontos positivos e dois pontos a melhorar.",
+          "consequences": { "reputacao": 2, "networking": 1, "aprendizado": 1, "ansiedade": 1 }
+        },
+        {
+          "id": "B",
+          "label": "Dar feedback genérico positivo: \"tá tudo bem, gostando muito.\"",
+          "consequences": { "energia": 1, "reputacao": -2 }
+        },
+        {
+          "id": "C",
+          "label": "Pedir tempo para pensar e mandar por escrito até sexta.",
+          "consequences": { "reputacao": 1, "aprendizado": 1, "produtividade": -1 }
+        }
+      ]
+    },
+    {
+      "id": "ev_day5_001",
+      "isMain": true,
+      "day": 5,
+      "sequence": 1,
+      "title": "Apresentação para o time",
+      "scene": "Você precisa fazer uma apresentação de 10 minutos para o time inteiro (uns 15 pessoas) sobre o que aprendeu na semana. Marcada para depois do almoço.",
+      "tags": ["exposicao", "reputacao", "entrega"],
+      "options": [
+        {
+          "id": "A",
+          "label": "Preparar slides estruturados na manhã, com problemas que você identificou.",
+          "consequences": { "reputacao": 3, "produtividade": 1, "energia": -2, "ansiedade": 1 }
+        },
+        {
+          "id": "B",
+          "label": "Apresentar sem slides, falando livremente sobre as experiências.",
+          "consequences": { "networking": 2, "reputacao": 1, "ansiedade": 3 }
+        },
+        {
+          "id": "C",
+          "label": "Pedir para adiar a apresentação para a próxima semana, alegando que ainda tem coisa a digerir.",
+          "consequences": { "energia": 2, "reputacao": -3 }
+        }
+      ]
+    },
+    {
+      "id": "ev_day5_002",
+      "isMain": true,
+      "day": 5,
+      "sequence": 2,
+      "title": "Almoço com a gerente",
+      "scene": "Sua gerente convida para almoçar só vocês dois. \"Quero bater um papo mais aberto sobre como você tá vendo a empresa.\" O restaurante é tranquilo.",
+      "tags": ["social", "reputacao", "carreira"],
+      "options": [
+        {
+          "id": "A",
+          "label": "Compartilhar abertamente o que você aprendeu, dúvidas reais e expectativas de carreira.",
+          "consequences": { "reputacao": 2, "networking": 2, "aprendizado": 1, "ansiedade": 1 }
+        },
+        {
+          "id": "B",
+          "label": "Manter a conversa cordial mas guardada, falar pouco de você.",
+          "consequences": { "energia": -1 }
+        },
+        {
+          "id": "C",
+          "label": "Recusar dizendo que precisa terminar coisa pendente para sexta.",
+          "consequences": { "produtividade": 1, "reputacao": -2, "networking": -2 }
+        }
+      ]
+    },
+    {
+      "id": "ev_day5_003",
+      "isMain": true,
+      "day": 5,
+      "sequence": 3,
+      "title": "Tarefa final, 17h45",
+      "scene": "Faltam 15 minutos para o fim da semana. Mensagem da gerente: \"Surgiu uma coisa de última hora, dá pra resolver hoje? Não é trivial mas não é absurdo.\"",
+      "tags": ["pressao", "limites", "encerramento"],
+      "options": [
+        {
+          "id": "A",
+          "label": "Aceitar e ficar o tempo que for necessário até entregar.",
+          "consequences": { "produtividade": 2, "reputacao": 2, "energia": -2, "ansiedade": 1 }
+        },
+        {
+          "id": "B",
+          "label": "Pedir o escopo, avaliar, dar um prazo realista para segunda de manhã.",
+          "consequences": { "produtividade": 1, "reputacao": 2, "aprendizado": 1 }
+        },
+        {
+          "id": "C",
+          "label": "Dizer honestamente: \"tô exausto, prefiro entregar bem feito na segunda cedo.\"",
+          "consequences": { "energia": 2, "reputacao": -1, "aprendizado": 1 }
+        },
+        {
+          "id": "D",
+          "label": "Recusar dizendo que não tem condição agora.",
+          "requires": { "min_attrs": { "ansiedade": 7 } },
+          "consequences": { "energia": 2, "ansiedade": -2, "reputacao": -3 }
+        }
+      ]
+    },
+    {
+      "id": "ev_secret_001",
+      "isMain": false,
+      "day": null,
+      "sequence": null,
+      "title": "Convite para projeto especial",
+      "scene": "Um líder de outra área que você nem conhece bem para na sua mesa: \"Soube que você está mandando bem. Tô montando um time pequeno para um projeto interno que vai começar mês que vem. Topa entrar?\"",
+      "tags": ["oportunidade", "networking", "carreira"],
+      "unlock": {
+        "min_attrs": { "reputacao": 7, "networking": 5 },
+        "after_day": 3
+      },
+      "options": [
+        {
+          "id": "A",
+          "label": "Aceitar imediatamente.",
+          "consequences": { "networking": 3, "reputacao": 1, "energia": -1, "ansiedade": 1 }
+        },
+        {
+          "id": "B",
+          "label": "Pedir um dia para pensar e conversar com sua gerente direta antes.",
+          "consequences": { "reputacao": 2, "aprendizado": 1 }
+        },
+        {
+          "id": "C",
+          "label": "Agradecer mas recusar dizendo que ainda está se ambientando.",
+          "consequences": { "reputacao": -1, "ansiedade": -1 }
+        }
+      ]
+    },
+    {
+      "id": "ev_secret_002",
+      "isMain": false,
+      "day": null,
+      "sequence": null,
+      "title": "Crise emocional no banheiro",
+      "scene": "Você entra no banheiro do andar e percebe que está respirando rápido demais. A mão está suando. Você não está bem.",
+      "tags": ["saude_mental", "ansiedade", "limites"],
+      "unlock": {
+        "min_attrs": { "ansiedade": 7 }
+      },
+      "options": [
+        {
+          "id": "A",
+          "label": "Mandar uma mensagem para alguém em quem confia (amigo, terapeuta, RH).",
+          "consequences": { "ansiedade": -3, "networking": 1, "reputacao": -1 }
+        },
+        {
+          "id": "B",
+          "label": "Esperar passar sozinho, lavar o rosto, voltar para mesa.",
+          "consequences": { "ansiedade": -1, "energia": -2 }
+        },
+        {
+          "id": "C",
+          "label": "Avisar a gerente que precisa sair mais cedo hoje.",
+          "consequences": { "ansiedade": -2, "energia": 1, "reputacao": -2 }
+        }
+      ]
+    }
+  ]
+}

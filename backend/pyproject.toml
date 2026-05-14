@@ -1,0 +1,35 @@
+[project]
+name = "corporate-survivor-backend"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn[standard]>=0.27",
+  "sqlalchemy>=2.0",
+  "pydantic>=2.5",
+  "pydantic-settings>=2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "httpx>=0.27",
+]
+
+# Build / packaging — necessário porque o backend tem múltiplos pacotes
+# top-level (db, engine, models, repositories, core, routers, schemas,
+# use_cases). Sem isto, setuptools (>=68) recusa o auto-discovery em
+# flat-layout. Explícito > implícito.
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+  "db*",
+  "engine*",
+  "models*",
+  "repositories*",
+  "core*",
+  "routers*",
+  "schemas*",
+  "use_cases*",
+]
+exclude = ["tests*", "data*"]

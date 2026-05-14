@@ -1,0 +1,40 @@
+# Secrets / ambiente local
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+*.egg-info/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+htmlcov/
+
+# Node / frontend
+node_modules/
+dist/
+build/
+.cache/
+
+# SQLite runtime (backend quando existir)
+*.db
+backend/data/*.db
+
+# Logs / IDE
+*.log
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Preflight / artefatos temporários locais (mantidos fora do histórico se aparecerem)
+.preflight_*/
+.preflight_final_tmp/
+.preflight_npm_final_tmp/
+.preflight_cs_tmp/

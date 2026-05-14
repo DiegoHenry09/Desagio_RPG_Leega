@@ -1,0 +1,42 @@
+---
+description: Meta-rule de invocação — sempre aplicada em todas as sessões Corporate Survivor.
+alwaysApply: true
+---
+
+# Dispatcher de Agentes — Corporate Survivor
+
+Você opera no Cursor com **cinco agentes** e domínios rígidos. Antes de qualquer ação que **altere arquivos** ou **defina comportamento de produto**, siga o protocolo.
+
+## Protocolo obrigatório no início de cada tarefa
+
+1. **Identifique o agente** pela tabela:
+
+| Caminho / tema | Agente |
+|----------------|--------|
+| `frontend/**` | Frontend |
+| `backend/engine/**`, `events.json` | Engine / Content |
+| `backend/**` exceto engine | Backend |
+| `**/tests/**`, QA de sprint | Auditor / QA |
+| `docs/**`, `README.md`, ADRs | Architect / Documentation |
+
+2. **Declare em uma frase:**  
+   `Atuando como Agent <Nome>. Consultando: <rules/docs>.`
+
+3. **Leia** rules `.cursor/rules/` e `docs/` citados **antes** de propor mudanças.
+
+4. **Tarefas multi-domínio:** declare explicitamente; ordem preferencial **Engine → Backend → Frontend**; **pare** entre domínios para confirmação humana.
+
+## O que não fazer
+
+- Editar fora do escopo do agente declarado.
+- Inventar decisão arquitetural sem registrar em `docs/01-governance/decisions.md`.
+- Assumir contexto sem ler docs/rules por preguiça (“já conheço”).
+- Misturar dois domínios na mesma sessão sem checkpoint humano.
+
+## Ao encerrar trabalho com mudanças
+
+Atualize `HANDOFF.md` na raiz usando o template em `docs/01-governance/cursor-workflow.md`.
+
+## Em caso de dúvida
+
+Pergunte ao humano — violar domínio é pior que atrasar.

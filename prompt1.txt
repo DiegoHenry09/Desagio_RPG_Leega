@@ -1,0 +1,67 @@
+
+---
+
+# Versão curta para colar no topo de uma nova janela
+
+Se você quiser algo mais curto, use este:
+
+```md
+Estamos no projeto Corporate Survivor, desafio de trainees com Cursor + IA.
+
+O foco do desafio é arquitetura, documentação, Cursor rules, organização de contexto, separação de responsabilidades e uso profissional de IA — não apenas gerar código.
+
+Estado atual:
+- Ambiente aprovado: Node 20.20.2, npm 10.8.2, Python 3.12.10 via `py -3.12`, Git, SQLite via Python.
+- Governança criada e validada.
+- `scripts/audit.ps1` passou com: `OK - governanca minima presente e raiz limpa.`
+- Não há backend, frontend nem engine ainda.
+- Skills formais do Cursor ainda não existem.
+- Agents são papéis operacionais por prompt + rules + docs + HANDOFF + audit.
+
+Estrutura:
+- README.md = porta de entrada.
+- PROJECT_STATUS.md = estado atual.
+- HANDOFF.md = último trabalho.
+- docs/00-start/ = estrutura, sprints, setup.
+- docs/01-governance/ = agent usage, workflow, decisions.
+- docs/02-product/ = architecture, game-rules, api.
+- docs/03-validation/ = audits e playthroughs.
+- .cursor/rules/ = rules reais do Cursor.
+- _context/original/ = histórico, não fonte canônica.
+
+Governança:
+Antes de alterar arquivos, a LLM deve declarar:
+- Agent ativo;
+- Sprint ativa;
+- arquivos lidos;
+- arquivos que pretende alterar;
+- arquivos proibidos;
+- riscos;
+- plano;
+- DoD.
+
+Output só é aceito se ficar no escopo, atualizar HANDOFF, trouxer evidência e rodar validação quando aplicável.
+
+Próxima etapa:
+Sprint 0.2 — Backend Healthcheck mínimo.
+
+Escopo permitido:
+- criar backend mínimo FastAPI;
+- `GET /api/health`;
+- `backend/pyproject.toml`;
+- atualizar docs/02-product/api.md;
+- atualizar HANDOFF.md;
+- rodar healthcheck e audit.ps1.
+
+Escopo proibido:
+- não criar frontend;
+- não criar engine;
+- não criar events.json;
+- não implementar jogo, jogadores, sessões, ranking ou SQLite real;
+- não usar Python 3.14;
+- não avançar para Sprint 0.3.
+
+Validação esperada:
+- backend sobe com uvicorn;
+- `/api/health` responde;
+- `scripts/audit.ps1` passa.

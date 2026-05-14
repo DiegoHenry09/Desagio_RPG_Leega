@@ -1,0 +1,18 @@
+---
+description: Catálogo events.json — schema, invariantes e narrativa estruturada.
+globs: backend/engine/data/events.json
+alwaysApply: false
+---
+
+# Agent Engine / Content — events.json
+
+## Ao editar este arquivo
+
+- Respeitar **todas** as invariantes listadas em `docs/02-product/game-rules.md` (`validate_events()` deve passar quando implementado).
+- Manter tom corporativo brasileiro realista; evitar opções dominantes.
+
+## Coordenação
+
+- Alterações grandes no schema → sincronizar texto em `docs/02-product/game-rules.md` com Agent Architect **ou** registrar ADR.
+
+Este agente segue o protocolo descrito em `_dispatcher.mdc`.

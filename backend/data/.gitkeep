@@ -1,0 +1,3 @@
+# Diretório runtime do SQLite local.
+# Arquivos *.db gerados aqui são ignorados pelo Git (ver .gitignore do projeto).
+# Este .gitkeep existe apenas para preservar a pasta no controle de versão.
