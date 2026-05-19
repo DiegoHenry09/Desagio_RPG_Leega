@@ -1,91 +1,43 @@
 # Corporate Survivor
 
-Narrativa interativa corporativa em primeira pessoa — trainee na primeira semana. Este repositório usa **governança por agentes** (Cursor rules + documentação em `docs/`) para separar backend, frontend, engine e QA.
+RPG narrativo corporativo em primeira pessoa. O jogador é um trainee na primeira semana de empresa, toma decisões em situações realistas de escritório e acompanha como cada escolha altera atributos como energia, reputação, networking, ansiedade, produtividade e aprendizado.
 
-## Comece aqui
+O projeto também demonstra governança de IA aplicada ao desenvolvimento: cada domínio tem agente, regras, documentação de referência, handoff e evidências de validação.
 
-> **Para gestores, avaliadores ou novos participantes:** leia primeiro o **[Dossiê Executivo](docs/00-start/executive-overview.md)** — ele explica o projeto, o que já foi entregue, o que falta e onde encontrar cada documento.  
-> **Entrega / validação / storytelling técnico consolidado:** **[Dossiê Final de Entrega](docs/00-start/final-delivery.md)** (Sprint 4.0 documental) — resumo executivo, UX, arquitetura, tecnologias, linha do tempo das sprints, evidências, governança de IA e limitações.
+## Estado atual
 
-Este projeto tem backend mínimo (`GET /api/health`), frontend mínimo (`API: ok`), regras críticas do jogo formalizadas e engine skeleton criada e testada. O ambiente corporativo foi validado.
+Entrega funcional e documentada:
 
-Antes de qualquer tarefa, a LLM deve declarar o agente ativo, a sprint ativa, os arquivos lidos/alterados e seguir o protocolo em `docs/01-governance/agent-usage.md` + `.cursor/rules/_dispatcher.mdc`.
+- Frontend jogável em React + Vite + TypeScript.
+- Backend FastAPI com API de jogadores, sessões, escolhas, ranking e perfil/histórico do jogador.
+- Engine em Python puro, desacoplada de HTTP, banco e interface.
+- Persistência SQLite via SQLAlchemy.
+- Catálogo narrativo versionado em `backend/engine/data/events.json`.
+- Documentação de arquitetura, API, regras de jogo, sprints, auditorias e decisões em `docs/`.
 
-| Quero encontrar... | Onde olhar |
-|---|---|
-| **Dossiê final (entrega / validação)** | **`docs/00-start/final-delivery.md`** |
-| Estado atual | `PROJECT_STATUS.md` |
-| Histórico de sprints (linha do tempo) | `docs/03-validation/sprint-history.md` |
-| Último trabalho feito | `HANDOFF.md` |
-| Estrutura do projeto | `docs/00-start/project-structure.md` |
-| Como usar agentes | `docs/01-governance/agent-usage.md` |
-| Fluxo com Cursor | `docs/01-governance/cursor-workflow.md` |
-| Plano de sprints | `docs/00-start/sprint-plan.md` |
-| Decisões arquiteturais | `docs/01-governance/decisions.md` |
-| Rules reais do Cursor | `.cursor/rules/` |
-| Histórico dos documentos originais | `_context/original/` |
-| Auditoria no Windows | `scripts/audit.ps1` |
+Resumo executivo consolidado: [`docs/00-start/final-delivery.md`](docs/00-start/final-delivery.md).
 
-## Se o gestor pedir documentação
+## Como rodar no Windows
 
-**Ponto de entrada único:** [`docs/00-start/executive-overview.md`](docs/00-start/executive-overview.md) — dossiê com resumo, estado atual, arquitetura, tecnologias, o que foi feito, o que falta e mapa completo de documentos.
+Opção rápida:
 
-Atalhos diretos:
+```powershell
+.\Abrir-Jogo.bat
+```
 
-| Necessidade | Arquivo |
-|---|---|
-| **Dossiê executivo** | `docs/00-start/executive-overview.md` |
-| **Dossiê final de entrega (gestão / avaliação)** | `docs/00-start/final-delivery.md` |
-| Status atual | `PROJECT_STATUS.md` |
-| Histórico de sprints | `docs/03-validation/sprint-history.md` |
-| Relatórios de aceite | `docs/03-validation/audits/` |
-| Governança de IA | `docs/01-governance/agent-usage.md` |
-| Decisões arquiteturais (ADRs) | `docs/01-governance/decisions.md` |
-| Arquitetura técnica | `docs/02-product/architecture.md` |
-| Regras do jogo | `docs/02-product/game-rules.md` |
-| API atual | `docs/02-product/api.md` |
+O script abre backend e frontend em janelas separadas e carrega o jogo no navegador.
 
-## Estado do repositório
+Opção via PowerShell:
 
-- **Governança** (Sprints 0.1–0.1-D): `docs/`, `.cursor/rules/`, `scripts/audit.ps1` criados e validados.
-- **Backend** (Sprint 0.2): `GET /api/health` implementado e aceito.
-- **Frontend** (Sprint 0.3): Vite + React + TypeScript com healthcheck na UI, aceito.
-- **Regras do jogo** (Sprint 1.0): finais, gatilhos antecipados e contrato da engine formalizados (ADR-010 aceita).
-- **Engine skeleton** (Sprint 1.1): `backend/engine/` criado em Python puro, 44/44 testes, `events.json` placeholder validável — aceito.
-- **Próxima sprint:** 1.2 — catálogo completo dos eventos.
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/dev-jogo.ps1
+```
 
-## Por onde começar
+O frontend roda em `http://localhost:5173` e o backend em `http://localhost:8000`.
 
-| Audiência | Documento |
-|-----------|-----------|
-| Visão geral + navegação | **`docs/00-start/project-structure.md`** |
-| Baseline de contexto | **`PROJECT_STATUS.md`** |
-| Arquitetura alvo | `docs/02-product/architecture.md` |
-| Regras do jogo / catálogo | `docs/02-product/game-rules.md` |
-| Contrato HTTP (stub → evoluir) | `docs/02-product/api.md` |
-| Decisões (ADRs) | `docs/01-governance/decisions.md` |
-| Sprints e DoD | `docs/00-start/sprint-plan.md` |
-| Fluxo Cursor / HANDOFF | `docs/01-governance/cursor-workflow.md` |
-| Ambiente corporativo | `docs/00-start/setup-company-env.md` |
-| Quem faz o quê (agentes) | `docs/01-governance/agent-usage.md` |
-| Histórico / snapshots | `_context/original/` |
+## Rodar manualmente
 
-## Variáveis de ambiente
-
-Copie `.env.example` para `.env` quando existir backend/frontend (valores locais **nunca** commitados).
-
-## Scripts
-
-- **`COMO-RODAR.txt`** — instruções rápidas (duplo clique vs dois terminais).
-- **`Abrir-Jogo.bat`** (na raiz) — duplo clique no Windows: abre **backend** (`:8000`) e **frontend** (`:5173`) em janelas separadas e carrega o jogo no navegador. Reinicie fechando cada janela ou `Ctrl+C`, depois rode de novo.
-- `scripts/dev-jogo.ps1` — mesmo fluxo pela linha de comando (`.\scripts\dev-jogo.ps1`). Opções: `-SkipBrowser`, `-SecondsBeforeBrowser 8`.
-- `scripts/audit.ps1` — auditoria principal no Windows/PowerShell.
-- `scripts/audit.sh` — auditoria equivalente para Git Bash/WSL (expandir quando houver código).
-- `scripts/reset_db.sh` — reset convenção SQLite quando backend existir.
-
-No Windows, use `powershell -ExecutionPolicy Bypass -File scripts/audit.ps1`.
-
-## Backend Healthcheck
+Backend:
 
 ```powershell
 cd backend
@@ -96,17 +48,7 @@ pip install -e ".[dev]"
 uvicorn app:app --reload --port 8000
 ```
 
-(No PowerShell corporativo, `Activate.ps1` pode bloquear por política de execução — prefira `activate.bat`.)
-
-Validar em outro terminal:
-
-```powershell
-Invoke-RestMethod http://localhost:8000/api/health
-```
-
-## Frontend Healthcheck
-
-Com o backend rodando em `http://localhost:8000`:
+Frontend:
 
 ```powershell
 cd frontend
@@ -114,24 +56,72 @@ npm install
 npm run dev
 ```
 
-Abrir `http://localhost:5173`. A tela deve mostrar `Corporate Survivor` e `API: ok`.
+Healthcheck:
 
-Em desenvolvimento, o consumo de `/api/health` costuma passar pelo proxy do Vite; CORS explícito no backend entra em sprint futura (ver `docs/02-product/api.md`).
+```powershell
+Invoke-RestMethod http://localhost:8000/api/health
+```
 
-## Sobre Agents e Skills
+## Arquitetura
 
-Os Agents deste projeto são **papéis operacionais**, não necessariamente botões visuais do Cursor. Eles são invocados por prompt, reforçados pelas rules em `.cursor/rules/` e guiados pelos documentos em `docs/`.
+O backend é a fonte da verdade para estado, escolhas, score e final. O frontend é thin client: renderiza o estado recebido da API e envia a escolha do jogador, sem calcular consequências oficiais.
 
-Ainda não há Skills formais criadas no painel do Cursor para este projeto. Por enquanto, a governança usa **Rules, HANDOFF, Docs e Audit**. Se Skills forem criadas no futuro, elas devem encapsular estes mesmos protocolos, não substituir as rules/docs.
+Camadas principais:
 
-## Próxima ação permitida
+- `frontend/`: interface jogável, páginas, componentes visuais, consumo da API.
+- `backend/routers/`: endpoints FastAPI finos.
+- `backend/use_cases/`: orquestração de fluxo e transações.
+- `backend/repositories/`: única camada que acessa o banco.
+- `backend/engine/`: regras de jogo, validação do catálogo, score e finais.
+- `docs/`: fonte de referência para arquitetura, produto, governança e validação.
 
-**Sprint 1.2 — Catálogo completo dos 15 + 2 eventos** (Agent Engine/Content): substituir placeholders em `backend/engine/data/events.json` pelo conteúdo narrativo real. Não iniciar API, persistência ou frontend jogável antes do catálogo estar aceito.
+## Documentação de referência
 
-Plano detalhado: [`docs/00-start/sprint-plan.md`](docs/00-start/sprint-plan.md).
+| Tema | Documento |
+|---|---|
+| Entrega final / avaliação | [`docs/00-start/final-delivery.md`](docs/00-start/final-delivery.md) |
+| Status executivo atual | [`PROJECT_STATUS.md`](PROJECT_STATUS.md) |
+| Histórico de sprints | [`docs/03-validation/sprint-history.md`](docs/03-validation/sprint-history.md) |
+| Último handoff | [`HANDOFF.md`](HANDOFF.md) |
+| Arquitetura técnica | [`docs/02-product/architecture.md`](docs/02-product/architecture.md) |
+| API HTTP | [`docs/02-product/api.md`](docs/02-product/api.md) |
+| Regras do jogo | [`docs/02-product/game-rules.md`](docs/02-product/game-rules.md) |
+| Decisões arquiteturais | [`docs/01-governance/decisions.md`](docs/01-governance/decisions.md) |
+| Governança de agentes | [`docs/01-governance/agent-usage.md`](docs/01-governance/agent-usage.md) |
+| Fluxo Cursor / handoff | [`docs/01-governance/cursor-workflow.md`](docs/01-governance/cursor-workflow.md) |
+| Relatórios de aceite | [`docs/03-validation/audits/`](docs/03-validation/audits/) |
+| Referências visuais | [`Referencia_front_RPG/`](Referencia_front_RPG/) |
 
-## Fonte da verdade
+## Governança de IA
 
-- **Backend** é fonte da verdade para estado de jogo, score e finais (quando implementado).
-- **Frontend** é thin client (sem calcular score/final oficialmente).
-- **`docs/02-product/game-rules.md`** define invariantes narrativos/mecânicos esperados pela engine.
+Antes de qualquer alteração, a LLM deve declarar:
+
+- agente ativo;
+- sprint ou etapa ativa;
+- documentos e rules consultados;
+- arquivos que pretende alterar;
+- arquivos que não deve tocar;
+- riscos de violar arquitetura.
+
+Regras centrais:
+
+- Frontend não calcula score, final ou consequências oficiais.
+- Engine não importa FastAPI, SQLAlchemy ou frontend.
+- Routers são finos; use cases orquestram; repositories acessam banco.
+- Mudança de API atualiza `docs/02-product/api.md`.
+- Mudança de regra de jogo atualiza `docs/02-product/game-rules.md`.
+- Toda sessão com alteração registra fechamento em `HANDOFF.md`.
+
+## Validação
+
+Auditoria principal no Windows:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/audit.ps1
+```
+
+Testes e validações completos por sprint ficam em [`docs/03-validation/audits/`](docs/03-validation/audits/).
+
+## Próximos passos
+
+O produto está em fase de validação final / entrega. Evoluções futuras previstas incluem polimento visual, testes automatizados de UI, paginação do ranking, URL bookmarkable e fluxo completo de evento secreto (`apply_secret_choice`).

@@ -6,6 +6,34 @@ Template detalhado por sessão (quando necessário): `docs/01-governance/cursor-
 
 ---
 
+## HANDOFF — 2026-05-19T11:03-03:00 — Agent Architect/Documentation — README GitHub
+
+### Declaração
+
+- **Atuei como:** Agent Architect/Documentation.
+- **Sprint / escopo:** ajuste documental pós-publicação no GitHub; README como vitrine pública do projeto.
+- **Rules consultadas:** `.cursor/rules/_dispatcher.mdc`, `.cursor/rules/docs-sync.mdc`; docs lidos: `docs/01-governance/agent-usage.md`, `PROJECT_STATUS.md`, `docs/00-start/final-delivery.md`, `docs/03-validation/sprint-history.md`, `docs/02-product/api.md`.
+- **Arquivos tocados:** `README.md`, `HANDOFF.md`.
+- **Não toquei:** `backend/**`, `frontend/**`, `backend/engine/**`, `docs/02-product/game-rules.md`, testes, scripts e configuração de ambiente.
+
+### O que fiz
+
+- Reescrevi o `README.md` para refletir o estado atual do projeto no GitHub: produto jogável, arquitetura, como rodar, governança de IA, validação e próximos passos.
+- Removi referências antigas a backend/frontend mínimo e à Sprint 1.2 como próxima ação.
+- Mantive seção explícita de documentação de referência, apontando para dossiê final, status, histórico de sprints, arquitetura, API, regras do jogo, decisões, governança, auditorias e referências visuais.
+
+### O que falta / próximo agente
+
+- Se houver nova entrega de produto, atualizar `PROJECT_STATUS.md`, `docs/03-validation/sprint-history.md` e relatórios aplicáveis.
+- Para evolução técnica, acionar o agente do domínio correspondente antes de editar código.
+
+### Evidências
+
+- Validação documental por leitura cruzada dos documentos acima.
+- Comandos Git/auditoria registrados na sessão após este handoff.
+
+---
+
 ## HANDOFF — 2026-05-15 (sessão 18) — Agent Architect/Documentation + Auditor/QA — Sprint 4.0 (dossiê final)
 
 ### Declaração
