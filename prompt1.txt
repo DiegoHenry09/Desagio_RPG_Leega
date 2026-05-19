@@ -65,3 +65,13 @@ Validação esperada:
 - backend sobe com uvicorn;
 - `/api/health` responde;
 - `scripts/audit.ps1` passa.
+
+
+
+cd C:\Users\dpfreitas\Desktop\Desagio_RPG_Leega\backend
+.\.venv\Scripts\activate.bat
+python -m uvicorn app:app --reload --host 127.0.0.1 --port 8000
+
+Terminal 2 — Frontend
+cd frontend
+npm run dev

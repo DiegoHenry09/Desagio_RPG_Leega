@@ -24,15 +24,18 @@ Linha do tempo **curta**. Detalhes e evidências completas ficam em `docs/03-val
 | **2.2** | Choices + engine persistidas (`POST /choices`, ranking ao fim; `secrets_seen_json`; CORS headers restritos) | Fechada tecnicamente (aceite papel pendente) | 103 pytest; `audit.ps1` OK — ver [`sprint-2.2.md`](audits/sprint-2.2.md) | [`sprint-2.2.md`](audits/sprint-2.2.md) |
 | **2.2-B** | Correções QA pré-Sprint 2.3 (4 testes novos: 404 sessão inexistente, count Decision, ranking==0 antes do fim, mismatch `event_id` válido; `sprint-2.2.md` ganha §4.A Agent/Rules/Skills + §7.2 playbook reset SQLite; HANDOFF/PROJECT_STATUS sincronizados) | Fechada tecnicamente (aceite papel pendente) | 107 pytest (103 + 4); `audit.ps1` OK; zero alteração em código de produção | [`sprint-2.2-B.md`](audits/sprint-2.2-B.md) |
 | **2.3** | Ranking API pública: `GET /api/ranking?limit=10` (envelope `{items, limit, count}`, ordem `score desc + tie-break determinístico`, `session_id` ocultado, bounds `1..100` no `limit`) + 9 testes novos (vazio, ordenação, default/custom limit, leak `session_id`, 3× bounds 422, smoke fim-a-fim até `demitido`). Engine/CORS/repositories/models intactos. | Fechada tecnicamente (aceite papel pendente) | 116 pytest (107 + 9); `audit.ps1` OK; `api.md` atualizado | [`sprint-2.3.md`](audits/sprint-2.3.md) |
+| **3.0** | Frontend jogável mínimo com palco visual: 4 telas (Home/Game/Ending/Ranking) consumindo API real; 7 personas + 8 cenas SVG placeholder (`asset-pipeline.md` §"Opção D"); 17 eventos mapeados; microanimação CSS dos atributos com `prefers-reduced-motion`; banner discreto para `inject_secret_event`; localStorage limitado a `cs.sessionId` + `cs.traineeVariant`; zero deps novas. | Fechada tecnicamente (aceite PM + smoke §7.2 com ressalvas) | `npm install/typecheck/build/lint` exit 0; bundle 74 KB gzip; `audit.ps1` OK; greps limpos; smoke HTTP §7.2 (`2026-05-15`) | [`sprint-3.0.md`](audits/sprint-3.0.md) |
+| **3.0-A** | Registo smoke E2E **manual** (browser); bugfix alinhamento **AttributePanel** (`AttributePanel.css`); nota `exit_code` pós-`Stop-Process`; aceite técnico consolidado; `npm run typecheck/lint/build` em `frontend/`. Sem backend/engine/events/rules/scripts. | Fechada documentalmente | Smoke manual **passou**; §7.2 mantido; typecheck/lint/build exit 0 (sessão 3.0-A) | [`sprint-3.0.md`](audits/sprint-3.0.md) §11 |
+| **4.0** | Dossiê final de entrega e validação documental: [`final-delivery.md`](../00-start/final-delivery.md) (12 secções: resumo executivo, storytelling, UX, arquitetura, stack, IA+governança, tabela de sprints, evidências, decisões, limitações, lições, próximos passos); README / PROJECT_STATUS / HANDOFF / este histórico atualizados; sem código de produto nem rules/scripts. | Fechada documentalmente | `audit.ps1` após alterações; Skills formais Cursor **não** utilizadas | — |
 
 ## Próxima sprint
 
-**Backlog engine/UX**: `apply_secret_choice` (segunda etapa do fluxo secreto) e **Sprint 3** (UX completa do frontend). Paralelo: **Architect/Documentation** fecha `executive-overview.md` cobrindo 2.x (`2.0-A/2.1-A` agregando 2.2 + 2.2-B + 2.3).
+**Pós-4.0 (produto):** polimento visual / UX (assets finais via IA + vetorização), testes automatizados de UI, paginação do ranking, URL bookmarkable se necessário. **Architect/Documentation:** atualizar `executive-overview.md` cobrindo 2.x + 3.0 + 3.0-A (pendência histórica). **Backlog engine/UX:** `apply_secret_choice`.
 
 ## Pendências transversais
 
-- Aceites humanos burocráticos legados quando aplicável (Sprints **2.1 §11**, **2.2 §8**, **2.2-B §10**, **2.3 §10** com aceite papel pendente — podem ser aceitos em conjunto).  
-- Dossier executivo (2.x).  
+- Aceites humanos burocráticos legados quando aplicável (Sprints **2.1 §11**, **2.2 §8**, **2.2-B §10**, **2.3 §10** — podem ser aceitos em conjunto). **3.0 / 3.0-A:** aceite **técnico** no relatório; papel §10 só se o processo exigir.  
+- Dossier executivo `executive-overview.md` (2.x + 3.0 + 3.0-A) — complementado por **`docs/00-start/final-delivery.md`** (Sprint 4.0).  
 - Fluxo secreto completo (`apply_secret_choice`) — backlog de engine/UX.
 - Reset SQLite local pós-2.2 (ver [`sprint-2.2.md §7.2`](audits/sprint-2.2.md#7-pendências-conscientes)).
 

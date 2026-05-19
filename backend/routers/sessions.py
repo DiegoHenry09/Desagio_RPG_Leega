@@ -53,6 +53,7 @@ def _snapshot_to_response(
     response = SessionResponse(
         id=session.id,
         player_id=session.player_id,
+        player_name=snapshot.player_name,
         status=session.status,
         current_day=session.current_day,
         current_sequence=session.current_sequence,

@@ -122,7 +122,14 @@ def test_ranking_response_omits_session_id_field(
 
     assert body["count"] == 1
     item = body["items"][0]
-    assert set(item.keys()) == {"id", "player_name", "score", "ending_id", "created_at"}
+    assert set(item.keys()) == {
+        "id",
+        "player_id",
+        "player_name",
+        "score",
+        "ending_id",
+        "created_at",
+    }
     assert "session_id" not in item
 
 

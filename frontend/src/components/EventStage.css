@@ -1,0 +1,43 @@
+.cs-event-stage {
+  aspect-ratio: 2 / 1;
+  background: var(--bg-muted);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.cs-event-stage__scene {
+  height: 100%;
+  width: 100%;
+}
+
+.cs-event-stage__scene > svg {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.cs-event-stage__persona {
+  animation: cs-fade-in var(--transition-slow) ease-out both;
+  bottom: auto;
+  height: 62%;
+  pointer-events: none;
+  position: absolute;
+  transform: translate(-50%, -100%);
+}
+
+.cs-event-stage__persona > svg {
+  animation: cs-breathe 4s ease-in-out infinite;
+  display: block;
+  height: 100%;
+  transform-origin: bottom;
+  width: auto;
+}
+
+@media (max-width: 640px) {
+  .cs-event-stage__persona {
+    height: 56%;
+  }
+}

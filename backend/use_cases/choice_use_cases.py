@@ -29,7 +29,7 @@ from repositories import session_repository as session_repo
 
 from .catalog_loader import get_catalog
 from .session_state import hydrate_engine_state
-from .session_use_cases import SessionSnapshot
+from .session_use_cases import SessionSnapshot, resolve_session_player_name
 
 
 @dataclass(frozen=True)
@@ -61,6 +61,7 @@ def _snapshot_after_persist(db: OrmSession, catalog: Catalog, session_id: int) -
         session=sess_row,
         attributes=attrs_row,
         current_event=ce,
+        player_name=resolve_session_player_name(db, sess_row.player_id),
     )
 
 

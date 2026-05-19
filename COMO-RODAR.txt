@@ -1,0 +1,55 @@
+Corporate Survivor — como rodar o jogo (Windows)
+=================================================
+
+OPÇÃO MAIS SIMPLES (você não digita nada nos terminais)
+------------------------------------------------------
+1. Dê DUPLO CLIQUE no arquivo:  Abrir-Jogo.bat  (na raiz desta pasta).
+2. Vão abrir DUAS janelas pretas (Backend e Frontend). Deixe as duas abertas.
+3. O navegador deve abrir em: http://127.0.0.1:5173/
+
+Para parar ou reiniciar: feche cada janela ou pressione Ctrl+C dentro delas,
+depois abra de novo o Abrir-Jogo.bat.
+
+Obs.: não dá para “rodar o jogo” sem essas janelas em modo desenvolvimento —
+elas são os servidores (API + Vite). Sem terminal só seria possível com um
+instalador/app empacotado (outro tipo de entrega).
+
+
+DOIS TERMINAIS MANUAIS (copiar e colar)
+---------------------------------------
+Abra dois PowerShell ou Prompt de Comando. Em AMBOS, comece indo para a pasta do projeto:
+
+  cd C:\Users\dpfreitas\Desktop\Desagio_RPG_Leega
+
+(Ajuste o caminho se seu projeto estiver em outro lugar.)
+
+
+TERMINAL 1 — Backend (porta 8000)
+---------------------------------
+  cd backend
+  .\.venv\Scripts\activate.bat
+  python -m uvicorn app:app --reload --host 127.0.0.1 --port 8000
+
+Use activate.bat (funciona no PowerShell e no CMD). Evita erro de "execução de scripts desabilitada"
+do Activate.ps1.
+
+Se no PowerShell você preferir o .ps1, só nesta janela:
+  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+  .\.venv\Scripts\Activate.ps1
+
+Se não tiver venv ainda, antes rode uma vez:
+  py -3.12 -m venv .venv
+  .\.venv\Scripts\activate.bat
+  python -m pip install --upgrade pip
+  pip install -e ".[dev]"
+
+
+TERMINAL 2 — Frontend (porta 5173)
+-----------------------------------
+  cd frontend
+  npm install
+  npm run dev
+
+Depois abra no navegador: http://127.0.0.1:5173/
+
+(Opcional: em vez de npm run dev, use  npm run dev:open  para abrir o browser sozinho.)

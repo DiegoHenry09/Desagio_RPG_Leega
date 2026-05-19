@@ -41,12 +41,24 @@ class SessionSnapshot:
     session: GameSession
     attributes: SessionAttributes
     current_event: Optional[Event]
+    player_name: str
 
 
 def _current_event(catalog: Catalog, session: GameSession) -> Optional[Event]:
     if session.status != "active":
         return None
     return catalog.get_main(session.current_day, session.current_sequence)
+
+
+def resolve_session_player_name(db: Session, player_id: int) -> str:
+    """Nome do `Player` ligado à sessão — 404 se registro órfão."""
+    player = player_repository.get(db, player_id)
+    if player is None:
+        raise NotFoundError(
+            f"Player {player_id} não encontrado.",
+            details={"player_id": player_id},
+        )
+    return player.name
 
 
 def create_session(db: Session, payload: SessionCreate) -> SessionSnapshot:
@@ -86,6 +98,7 @@ def create_session(db: Session, payload: SessionCreate) -> SessionSnapshot:
         session=session,
         attributes=attrs,
         current_event=_current_event(catalog, session),
+        player_name=player.name,
     )
 
 
@@ -107,4 +120,5 @@ def get_session_snapshot(db: Session, session_id: int) -> SessionSnapshot:
         session=session,
         attributes=attrs,
         current_event=_current_event(get_catalog(), session),
+        player_name=resolve_session_player_name(db, session.player_id),
     )

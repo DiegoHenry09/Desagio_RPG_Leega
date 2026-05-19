@@ -407,7 +407,7 @@ Tom: corporativo brasileiro realista. Sem vilões. Sem heróis. Cada opção é 
 
 #### `ev_day5_001` — Apresentação para o time (sequence 1)
 
-**Cena:** Você precisa fazer uma apresentação de 10 minutos para o time inteiro (uns 15 pessoas) sobre o que aprendeu na semana. Marcada para depois do almoço.
+**Cena:** Você precisa fazer uma apresentação de 10 minutos para o time inteiro (umas 15 pessoas) sobre o que aprendeu na semana. Marcada para depois do almoço.
 
 **Opções:**
 - **A — Preparar slides estruturados na manhã, com problemas que você identificou.**

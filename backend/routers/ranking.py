@@ -45,7 +45,17 @@ def list_ranking_endpoint(
     ),
 ) -> RankingListResponse:
     rows = list_top_ranking(db, limit=limit)
-    items = [RankingEntryResponse.model_validate(row) for row in rows]
+    items = [
+        RankingEntryResponse(
+            id=row.id,
+            player_id=row.session.player_id,
+            player_name=row.player_name,
+            score=row.score,
+            ending_id=row.ending_id,
+            created_at=row.created_at,
+        )
+        for row in rows
+    ]
     return RankingListResponse(
         items=items,
         limit=limit,

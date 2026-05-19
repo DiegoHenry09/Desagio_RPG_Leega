@@ -2,10 +2,10 @@
 Schemas Pydantic v2 para Ranking — API HTTP (Sprint 2.3).
 
 Decisões de exposição:
-  - `RankingEntryResponse` expõe `id`, `player_name`, `score`, `ending_id`,
-    `created_at`. **NÃO** expõe `session_id` — é chave estrangeira interna
-    e revelaria informação operacional (quantas sessões um jogador teve)
-    sem necessidade para o produto público.
+  - `RankingEntryResponse` expõe `id`, `player_id` (dono da sessão da partida),
+    `player_name`, `score`, `ending_id`, `created_at`. **`player_id`** permite
+    navegar ao perfil/histórico sem ambiguidade quando há nomes repetidos.
+    **NÃO** expõe `session_id` — chave estrangeira interna da sessão.
   - `RankingListResponse` é envelope `{ items, limit, count }`. Não usa
     cursor/offset (Sprint 2.3 implementa só limite, conforme escopo).
     Envelope é compatível com paginação futura sem quebrar o contrato.
@@ -24,6 +24,7 @@ class RankingEntryResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     id: int
+    player_id: int
     player_name: str
     score: int
     ending_id: str

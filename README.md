@@ -4,7 +4,8 @@ Narrativa interativa corporativa em primeira pessoa — trainee na primeira sema
 
 ## Comece aqui
 
-> **Para gestores, avaliadores ou novos participantes:** leia primeiro o **[Dossiê Executivo](docs/00-start/executive-overview.md)** — ele explica o projeto, o que já foi entregue, o que falta e onde encontrar cada documento.
+> **Para gestores, avaliadores ou novos participantes:** leia primeiro o **[Dossiê Executivo](docs/00-start/executive-overview.md)** — ele explica o projeto, o que já foi entregue, o que falta e onde encontrar cada documento.  
+> **Entrega / validação / storytelling técnico consolidado:** **[Dossiê Final de Entrega](docs/00-start/final-delivery.md)** (Sprint 4.0 documental) — resumo executivo, UX, arquitetura, tecnologias, linha do tempo das sprints, evidências, governança de IA e limitações.
 
 Este projeto tem backend mínimo (`GET /api/health`), frontend mínimo (`API: ok`), regras críticas do jogo formalizadas e engine skeleton criada e testada. O ambiente corporativo foi validado.
 
@@ -12,6 +13,7 @@ Antes de qualquer tarefa, a LLM deve declarar o agente ativo, a sprint ativa, os
 
 | Quero encontrar... | Onde olhar |
 |---|---|
+| **Dossiê final (entrega / validação)** | **`docs/00-start/final-delivery.md`** |
 | Estado atual | `PROJECT_STATUS.md` |
 | Histórico de sprints (linha do tempo) | `docs/03-validation/sprint-history.md` |
 | Último trabalho feito | `HANDOFF.md` |
@@ -33,6 +35,7 @@ Atalhos diretos:
 | Necessidade | Arquivo |
 |---|---|
 | **Dossiê executivo** | `docs/00-start/executive-overview.md` |
+| **Dossiê final de entrega (gestão / avaliação)** | `docs/00-start/final-delivery.md` |
 | Status atual | `PROJECT_STATUS.md` |
 | Histórico de sprints | `docs/03-validation/sprint-history.md` |
 | Relatórios de aceite | `docs/03-validation/audits/` |
@@ -73,6 +76,9 @@ Copie `.env.example` para `.env` quando existir backend/frontend (valores locais
 
 ## Scripts
 
+- **`COMO-RODAR.txt`** — instruções rápidas (duplo clique vs dois terminais).
+- **`Abrir-Jogo.bat`** (na raiz) — duplo clique no Windows: abre **backend** (`:8000`) e **frontend** (`:5173`) em janelas separadas e carrega o jogo no navegador. Reinicie fechando cada janela ou `Ctrl+C`, depois rode de novo.
+- `scripts/dev-jogo.ps1` — mesmo fluxo pela linha de comando (`.\scripts\dev-jogo.ps1`). Opções: `-SkipBrowser`, `-SecondsBeforeBrowser 8`.
 - `scripts/audit.ps1` — auditoria principal no Windows/PowerShell.
 - `scripts/audit.sh` — auditoria equivalente para Git Bash/WSL (expandir quando houver código).
 - `scripts/reset_db.sh` — reset convenção SQLite quando backend existir.
@@ -84,11 +90,13 @@ No Windows, use `powershell -ExecutionPolicy Bypass -File scripts/audit.ps1`.
 ```powershell
 cd backend
 py -3.12 -m venv .venv
-.\.venv\Scripts\Activate.ps1
+.\.venv\Scripts\activate.bat
 python -m pip install --upgrade pip
 pip install -e ".[dev]"
 uvicorn app:app --reload --port 8000
 ```
+
+(No PowerShell corporativo, `Activate.ps1` pode bloquear por política de execução — prefira `activate.bat`.)
 
 Validar em outro terminal:
 

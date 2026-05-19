@@ -6,6 +6,223 @@ Template detalhado por sessão (quando necessário): `docs/01-governance/cursor-
 
 ---
 
+## HANDOFF — 2026-05-15 (sessão 18) — Agent Architect/Documentation + Auditor/QA — Sprint 4.0 (dossiê final)
+
+### Declaração
+
+- **Agents:** Architect/Documentation + Auditor/QA (`docs/**`, `README.md`, `PROJECT_STATUS.md`, `HANDOFF.md`, `docs/03-validation/sprint-history.md` — sem código de produção).
+- **Sprint:** **4.0 — Dossiê Final de Entrega e Validação Documental.**
+- **Rules consultadas:** `.cursor/rules/_dispatcher.mdc`, `.cursor/rules/docs-sync.mdc`; leitura obrigatória conforme prompt: README, PROJECT_STATUS, HANDOFF, `docs/00-start/*`, `docs/01-governance/*`, `docs/02-product/*`, `docs/03-validation/sprint-history.md`, `docs/03-validation/audits/sprint-3.0.md`, `Referencia_front_RPG/SKILL.md`, `style-guide.md`, `asset-pipeline.md`, `event-visuals-map.md`, `personas.md`, `scenes.md`.
+
+### Deltas
+
+- **Criado:** [`docs/00-start/final-delivery.md`](docs/00-start/final-delivery.md) — dossiê em 12 secções (resumo executivo, storytelling, UX, arquitetura, tecnologias, IA+governança, tabela de sprints, evidências, decisões, limitações, lições, próximos passos).
+- **Alterados:** [`README.md`](README.md) — link ao dossiê final; [`PROJECT_STATUS.md`](PROJECT_STATUS.md) — fase validação final/entrega, Sprint 4.0 documental; [`docs/03-validation/sprint-history.md`](docs/03-validation/sprint-history.md) — linha **4.0** + “Próxima sprint” pós-4.0; este **HANDOFF**.
+
+### Evidência
+
+- `powershell -ExecutionPolicy Bypass -File scripts/audit.ps1` — exit **0**; saída: `OK - governanca minima presente e raiz limpa.`
+
+### Pendências
+
+- Atualizar `docs/00-start/executive-overview.md` para 2.x + 3.0 + 3.0-A (pendência histórica; `final-delivery.md` cobre gestores para entrega).
+- Evolução de produto: assets finais, `apply_secret_choice`, testes UI, deploy quando decidido.
+- Aceites papel **2.x** em lote, se o processo exigir.
+
+### Skills formais
+
+- **Skills formais do Cursor não utilizadas nesta sessão.** `Referencia_front_RPG/SKILL.md` é documento de referência humano, não Skill instalada.
+
+---
+
+## HANDOFF — 2026-05-15 (sessão 17) — Agent Setup/Frontend — atalho Windows para dev
+
+### Declaração
+
+- **Agents:** Setup/Environment + Frontend (scripts + npm).
+- **Rules:** `_dispatcher.mdc`.
+
+### Deltas
+
+- **`Abrir-Jogo.bat`** (raiz) + **`scripts/dev-jogo.ps1`**: duplo clique abre 2 terminais (uvicorn `:8000`, Vite `:5173`) e o browser em `http://127.0.0.1:5173/`.
+- **`frontend/package.json`**: script `npm run dev:open` (só Vite + browser).
+- **`README.md`**: secção Scripts atualizada.
+
+### Pendências
+
+- Na primeira vez: `pip install -e ".[dev]"` no backend e `npm install` no frontend (como no README).
+
+---
+
+## HANDOFF — 2026-05-15 (sessão 16) — Agent Backend + Frontend — Perfil / histórico do jogador
+
+### Declaração
+
+- **Agents:** Backend (`backend/**` exceto engine) + Frontend (`frontend/**`).
+- **Sprint:** **3.0+** — feature UX de ranking (histórico + stats).
+- **Rules:** `_dispatcher.mdc`, `backend.mdc`, `frontend.mdc`; contrato em `docs/02-product/api.md`.
+
+### Deltas
+
+- **Backend:** `player_id` em `RankingEntryResponse`; `GET /api/players/{id}/profile`; `GET /api/players/{id}/runs/{ranking_entry_id}/choices`; repositório `list_for_player_profile`; use case `player_profile_use_cases`; testes `test_player_profile_api.py`; `test_ranking_api` atualizado (campos da linha).
+- **Frontend:** `PlayerProfilePage` (stats, finais, partidas, timeline de escolhas); ranking com nome clicável; `getPlayerProfile` / `getPlayerRunChoices`.
+- **Docs:** `docs/02-product/api.md`.
+
+### Evidência
+
+- `pytest tests/test_ranking_api.py tests/test_player_profile_api.py` — **14 passed**.
+- `npm run build` (frontend) — **ok**.
+
+### Pendências
+
+- Nenhuma crítica; opcional: mover schemas de perfil no `api.md` para secção própria após `SessionResponse`.
+
+---
+
+## HANDOFF — 2026-05-15 (sessão 15) — Agent Frontend + Backend — UX sessão (nick, semana, nomes de personas)
+
+### Declaração
+
+- **Agents:** Frontend (`frontend/**`) + Backend (`backend/**` exceto engine) — extensão mínima de contrato para expor `player_name` no snapshot de sessão (evita persistir nick no `localStorage`, alinhado a `frontend.mdc`).
+- **Sprint:** **3.0 / pós-3.0-A** — melhoria de UI jogável.
+- **Rules consultadas:** `_dispatcher.mdc`, `frontend.mdc`, `backend.mdc`, `Referencia_front_RPG/SKILL.md`, `Referencia_front_RPG/personas.md`.
+
+### Deltas
+
+- **Backend:** `SessionResponse` + `SessionSnapshot` passam a incluir `player_name` (join lógico via `player_repository`); `choice_use_cases._snapshot_after_persist` preenche o campo; testes `test_sessions_api.py` ajustados.
+- **Docs:** `docs/02-product/api.md` — exemplo JSON com `player_name`.
+- **Frontend:** `SessionResponse` em `api/types.ts`; `App.tsx` + `App.css` — nick no header em **game** e **ending**; `GamePage` — faixa Seg–Sex numerada (1–5) + dia da semana por extenso no pill; `dialogueSpeakerName` + rótulos de personas alinhados ao catálogo de referência; `GamePage.css`.
+- **Evidência:** `npm run build` no frontend **passou**. Pytest local não executado aqui (ambiente sem `pytest` no `python` global); rodar `pip install -e ".[dev]"` no `backend` e `pytest tests/test_sessions_api.py` antes do merge.
+
+### Pendências
+
+- Garantir backend atualizado em conjunto com o frontend (campo novo obrigatório no JSON).
+
+---
+
+## HANDOFF — 2026-05-15 (sessão 14) — Agent Frontend + Documentation — Sprint 3.0-A
+
+### Declaração
+
+- **Agent:** Frontend + Documentation.
+- **Sprint:** **3.0-A** — Registo do smoke E2E manual, bugfix do `AttributePanel`, aceite técnico consolidado da Sprint 3.0; **sem** nova feature; **sem** alterar backend/engine/`events.json`/rules/scripts.
+- **Rules consultadas:** [`.cursor/rules/_dispatcher.mdc`](.cursor/rules/_dispatcher.mdc), [`.cursor/rules/frontend.mdc`](.cursor/rules/frontend.mdc).
+
+### Deltas
+
+- [`docs/03-validation/audits/sprint-3.0.md`](docs/03-validation/audits/sprint-3.0.md) — secções **Smoke E2E manual**, **Bugfix observado no frontend**, **Observação sobre encerramento dos processos**; **§11 Sprint 3.0-A**; §7, §9 e §10 actualizados.
+- [`HANDOFF.md`](HANDOFF.md) — esta entrada; bloco **Estado atual** / **Próximo passo** / **Pendências** sincronizados.
+- [`PROJECT_STATUS.md`](PROJECT_STATUS.md) — Sprint 3.0 validada por smoke manual; próxima fase **4.0**.
+- [`docs/03-validation/sprint-history.md`](docs/03-validation/sprint-history.md) — linha **3.0-A**.
+
+### Smoke E2E
+
+- **Manual (browser):** **passou** — `localhost:8000` + `localhost:5173`; Home → player → session → evento → escolha → atributos/evento → reload/continuar quando aplicável → ranking (detalhe em `sprint-3.0.md`).
+- **Automatizado (§7.2):** mantém registo **passou com ressalvas** (HTTP sem UI completa).
+
+### Bugfix
+
+- **`AttributePanel`:** alinhamento da coluna numérica e da barra — [`frontend/src/components/AttributePanel.css`](frontend/src/components/AttributePanel.css) (ver relatório Sprint 3.0).
+
+### Aceite / próxima sprint
+
+- **Sprint 3.0:** tecnicamente **aceite** (implementação + smoke manual + documentação 3.0-A).
+- **Smoke E2E global:** **passou** (manual); §7.2 permanece como evidência complementar com ressalvas.
+- **Próxima sprint recomendada:** **4.0** — polimento final / UX / auditoria de entrega (e.g. assets IA, testes UI, paginação ranking).
+
+---
+
+## HANDOFF — 2026-05-15 (sessão 13) — Smoke E2E Sprint 3.0 (registro)
+
+### Declaração
+
+- **Agent:** Frontend (execução de smoke + atualização de `docs/03-validation/audits/sprint-3.0.md` e `HANDOFF.md` apenas).
+- **Sprint:** **3.0** — encerramento operacional com smoke conforme [`sprint-3.0.md` §7.1 / §7.2](docs/03-validation/audits/sprint-3.0.md).
+- **Escopo:** não alterar `backend/**`, `engine/**`, `events.json`, `.cursor/rules/**`, `scripts/**` (cumprido).
+
+### Smoke E2E — resultado
+
+- **Status:** **passou com ressalvas** — servidores locais (`uvicorn` :8000 + `npm run dev` :5173); validação do fluxo via **HTTP à API** + `GET` da raiz do Vite (HTML contém `Corporate Survivor`). Itens §7.1.9–10 (motion no DevTools + evento secreto) e **print** não executados nesta rodada; sem cliques manuais no navegador pelo agente.
+- **Evidência canônica:** [`docs/03-validation/audits/sprint-3.0.md` §7.2](docs/03-validation/audits/sprint-3.0.md) (data/hora UTC, passos, trecho de saída, ranking sem `session_id`, opções só `id`/`label`).
+
+### Aceite / próxima sprint
+
+- **Sprint 3.0:** tecnicamente **fechada** (implementação aceita pelo PM; smoke registrado).
+- **Próxima sprint recomendada:** **Sprint 4** (assets visuais finais / polish) em paralelo ao backlog **engine/UX** `apply_secret_choice`; opcional: testes de UI automatizados e paginação do ranking.
+
+---
+
+## HANDOFF — 2026-05-15 (sessão 12) — Agent Frontend — Sprint 3.0 (Frontend jogável mínimo com palco visual)
+
+### Declaração
+
+- **Agent:** Frontend.
+- **Sprint:** **3.0 — Frontend jogável mínimo com palco visual**.
+- **Rules consultadas:** [`.cursor/rules/_dispatcher.mdc`](.cursor/rules/_dispatcher.mdc), [`.cursor/rules/frontend.mdc`](.cursor/rules/frontend.mdc) + arquivos de referência visual autorizados pelo prompt: `Referencia_front_RPG/SKILL.md`, `style-guide.md`, `asset-pipeline.md`, `event-visuals-map.md`, `personas.md`, `scenes.md`.
+
+### Principais deltas
+
+**Criados (32 arquivos em `frontend/src/` + 1 audit + esta seção):**
+
+- `frontend/src/styles/` — `tokens.css` (paleta + tipografia do style-guide), `animations.css` (keyframes + bloco global `prefers-reduced-motion`).
+- `frontend/src/api/` — `types.ts` (espelho do `SessionResponse` real; `OptionPayload` sem `consequences`; `RankingItem` sem `session_id`), `client.ts` (5 endpoints + `ApiError` que preserva envelope `{error:{code,message,details}}`).
+- `frontend/src/state/sessionStorage.ts` — helpers `getSessionId/setSessionId/clearSessionId/getTraineeVariant` (3 variantes).
+- `frontend/src/assets/visuals/personas/` — `_index.tsx` + 7 componentes (Trainee com 3 variantes, Gestor, Gerente, Colega, Rh, Senior, LiderExterno). Placeholders geométricos viewBox `0 0 200 320` conforme `asset-pipeline.md` §"Opção D".
+- `frontend/src/assets/visuals/scenes/` — `_index.tsx` + 8 componentes (SalaReuniao, MesaTrabalho, Restaurante, Bar, Banheiro, SalaApresentacao, Copa, DefaultScene). viewBox `0 0 800 400`.
+- `frontend/src/assets/visuals/icons/` — `AttributeIcons.tsx` (6 ícones SVG inline com `currentColor`) + `_index.ts` (registry + labels + cores). Split por causa do lint react-refresh.
+- `frontend/src/assets/visuals/sceneAnchors.ts` — pontos de ancoragem por cena (fração x/y).
+- `frontend/src/assets/visuals/eventVisualsMap.ts` — `Record<event_id, { scene, personas[] }>` cobrindo os 17 eventos (15 principais + 2 secretos). Camada **de apresentação**, comentário explícito "NÃO é regra de jogo, NÃO é catálogo".
+- `frontend/src/components/` — `SceneSVG`, `PersonaSVG`, `EventStage` + css, `AttributePanel` + css, `ChoiceList` + css, `SecretEventBanner` + css, `RankingPanel` + css, `EndingView` + css.
+- `frontend/src/pages/` — `HomePage` + css, `GamePage` + css, `EndingPage`, `RankingPage` + css.
+- `docs/03-validation/audits/sprint-3.0.md` — relatório completo no padrão das sprints anteriores.
+
+**Alterados (mínimos):**
+
+- `frontend/src/App.tsx` — substituído o healthcheck pelo orquestrador de estado entre Home/Game/Ending/Ranking.
+- `frontend/src/App.css` — substituído por shell mínimo (header/main/footer).
+- `frontend/src/index.css` — importa `styles/tokens.css` + `styles/animations.css`; mantém reset.
+- `HANDOFF.md` (esta seção), `PROJECT_STATUS.md`, `docs/03-validation/sprint-history.md` — sincronia documental rotineira.
+
+### Escopo preservado (proibido — verificado)
+
+- `backend/**`, `backend/engine/**`, `backend/engine/data/events.json`, `.cursor/rules/**`, `scripts/**`, `docs/02-product/**`, `docs/01-governance/**`, `docs/00-start/**`, `_context/**`, `Referencia_front_RPG/**` → **zero alterações**.
+- `frontend/package.json`, `frontend/package-lock.json`, `frontend/vite.config.ts`, `frontend/tsconfig*.json`, `frontend/eslint.config.js`, `frontend/index.html`, `frontend/src/main.tsx`, `frontend/public/icons.svg`, `frontend/README.md` → **zero alterações** (zero deps novas instaladas).
+
+### Evidências
+
+- `npm install` em `frontend/` → "up to date, audited 154 packages, found 0 vulnerabilities". Exit 0.
+- `npm run typecheck` → tsc --noEmit, saída vazia. Exit 0.
+- `npm run build` → `dist/index.html 0.47kB | gzip 0.30kB`, `dist/assets/index-*.css 17.23kB | gzip 3.65kB`, `dist/assets/index-*.js 236.73kB | gzip 70.21kB`. 61 módulos transformados. Exit 0. Bundle final gzipado **74 KB** (dentro do orçamento do SKILL.md "página inteira ≤ 500KB").
+- `npm run lint` → saída vazia. Exit 0. Inicialmente reportou 10 erros (no-useless-assignment, react-refresh, set-state-in-effect) — todos corrigidos antes do fechamento.
+- `audit.ps1` → "OK - governanca minima presente e raiz limpa." Exit 0.
+- Greps de governança:
+  - `rg "consequences|compute_score|apply_choice|resolve_ending" frontend/src` → 2 hits, **apenas em comentários** explicando "deliberadamente NÃO".
+  - `rg -i "fastapi|sqlalchemy|pydantic" frontend/src` → **0 matches** (desacoplamento total).
+  - `rg "session_id" frontend/src` → 2 hits, **apenas em comentários** documentando a invariante de privacidade.
+  - `rg "localStorage|setItem|getItem" frontend/src` → matches **apenas em** `state/sessionStorage.ts` (centralizado).
+- Skills formais não utilizadas nesta sprint.
+
+### O que NÃO foi implementado (intencional)
+
+- Cálculo de score, final ou consequência no cliente.
+- Hardcode de eventos do catálogo (somente mapeamento visual id → cena/personas).
+- Fluxo completo do evento secreto — `inject_secret_event` apenas mostra banner discreto sem opções (`apply_secret_choice` continua backlog da engine).
+- `POST /api/sessions/{id}/restart` / `continue` — não existem na API.
+- Ranking fake — `getRanking` sempre vai na API real.
+- GIF pesado / Lottie pesado — nenhum.
+- Tailwind, react-router, @fontsource/inter, lucide-react, lottie-react — nenhum instalado.
+- Sprint 4 — fora do escopo.
+- Smoke E2E operacional: **executado e registrado** em [`sprint-3.0.md` §7.2](docs/03-validation/audits/sprint-3.0.md) (sessão 13 deste HANDOFF). Passo opcional: repetir §7.1 no navegador com print se o PM quiser evidência visual.
+
+### Próximo passo
+
+- ~~Smoke E2E manual com `uvicorn app:app --port 8000` + `npm run dev` em `frontend/` (playbook §7.1 do relatório).~~ **Concluído** (registro §7.2; ressalvas documentadas).
+- Aceites humanos formais das Sprints 2.1, 2.2, 2.2-B, 2.3 e 3.0 (em conjunto se conveniente).
+- **Architect/Documentation** — atualizar `executive-overview.md` cobrindo 2.x + 3.0.
+- **Backlog engine/UX:** `apply_secret_choice` (segunda etapa secreta) e Sprint 4 opcional (assets visuais finais por IA, testes automatizados de UI, paginação ranking, URL bookmarkable).
+
+---
+
 ## HANDOFF — 2026-05-14 — Agent Setup/Environment
 
 ### Declaração
@@ -49,36 +266,40 @@ git push -u origin main
 
 ---
 
-## Estado atual (2026-05-14)
+## Estado atual (2026-05-15)
 
-- **Git local:** repositório inicializado nesta pasta (`main`), primeiro commit local pronto para `git push` após criar o remoto privado **`desafio_rpg_leega`** (instruções na sessão HANDOFF acima).  
-- **Repositório:** backend com `GET /api/health` + persistência SQLite + **fluxo jogável** (`POST /api/sessions/{id}/choices` integrado à `engine.apply_choice`, ranking gravado ao fim da partida) + **leaderboard público** (`GET /api/ranking?limit=10` da Sprint 2.3, envelope `{items, limit, count}`, `session_id` ocultado). Frontend healthcheck sem alterações nesta linha 2.x (Vite/React fica igual). Catálogo `events.json` intacto na pasta da engine — validado no boot (`validate_events`).
-- **Última sprint executável fechada tecnicamente:** Sprint **2.3** — Ranking API + smoke tests (`docs/03-validation/audits/sprint-2.3.md`). 9 testes novos (incluindo smoke fim-a-fim que joga até `demitido` e verifica entrada no ranking). 116/116 pytest verdes.
-- **Sprint 2.2** continua intacta — `POST /choices` + engine + persistência (`docs/03-validation/audits/sprint-2.2.md`); estado da engine hidratado de SQLite via `secrets_seen_json` + histórico de `Decision`.
-- **Sprint 2.2-B** continua intacta — Correções QA endereçadas (`docs/03-validation/audits/sprint-2.2-B.md`).
-- **Sprint 2.1:** aceite humano formal §11 papel **PENDENTE** (alinhamento com `docs/03-validation/audits/sprint-2.1.md §11` — entrega técnica intacta).
+- **Git local:** repositório inicializado nesta pasta (`main`), primeiro commit local pronto para `git push` após criar o remoto privado **`desafio_rpg_leega`** (instruções na sessão HANDOFF de Setup/Environment abaixo).  
+- **Repositório:** backend com `GET /api/health` + persistência SQLite + fluxo jogável (`POST /api/sessions/{id}/choices` + ranking gravado ao fim) + leaderboard público (`GET /api/ranking?limit=10`, envelope `{items, limit, count}`, `session_id` ocultado). **Frontend jogável mínimo (Sprint 3.0)**: 4 telas Home/Game/Ending/Ranking consumindo a API real; palco visual SVG (7 personas + 8 cenas placeholder); microanimação CSS com `prefers-reduced-motion`; banner discreto para `inject_secret_event`. Zero dependências novas. Catálogo `events.json` intacto.
+- **Última sprint executável fechada tecnicamente:** Sprint **3.0** + fecho **3.0-A** — Frontend jogável mínimo com palco visual; smoke **manual** no browser (**passou**); smoke **§7.2** HTTP (**passou com ressalvas**); bugfix **AttributePanel** (`AttributePanel.css`); [`sprint-3.0.md`](docs/03-validation/audits/sprint-3.0.md) §§7–11. `npm run typecheck/lint/build` em `frontend/` revalidados na **3.0-A**; bundle ~74 KB gzip; `audit.ps1` OK; greps de governança limpos.
+- **Última sprint documental:** **4.0** — [`docs/00-start/final-delivery.md`](docs/00-start/final-delivery.md) (dossiê final de entrega); README / PROJECT_STATUS / `sprint-history` / HANDOFF sincronizados; sem código de produto.
+- **Sprint 2.3** continua intacta — Ranking API ([`sprint-2.3.md`](docs/03-validation/audits/sprint-2.3.md)); 116/116 pytest verdes.
+- **Sprint 2.2 / 2.2-B** intactas — engine integrada às choices + persistência + correções QA.
+- **Sprint 2.1:** aceite humano formal §11 papel **PENDENTE** (entrega técnica intacta).
 - **Última sprint documental aceita:** Sprint **1.2-A**.  
-- **Últimas sprints aceitas formalmente (registro papel):** 2.0 ✅; aceites pendentes para **2.1**, **2.2**, **2.2-B**, **2.3** e demais backlog histórico.
+- **Últimas sprints aceitas formalmente (registro papel):** 2.0 ✅; aceites burocráticos pendentes para **2.1, 2.2, 2.2-B, 2.3**; **3.0 / 3.0-A** com aceite **técnico** e smoke documentados no relatório (papel §10 só se o processo exigir).
 
 ## Próximo passo recomendado
 
-1. Aceite humano das **Sprints 2.1 + 2.2 + 2.2-B + 2.3** (§10/§11 dos respectivos relatórios — podem ser aceitos em conjunto).  
-2. **Architect/Documentation** — `executive-overview.md` (pendência 2.0‑A / 2.1‑A consolidando também 2.2 + 2.2-B + 2.3).  
-3. **Backlog engine/UX:** `apply_secret_choice` (segunda etapa do fluxo secreto) e Sprint 3 (UX completa do frontend).  
+1. ~~Smoke E2E manual do frontend com backend rodando — playbook em [`sprint-3.0.md §7.1`](docs/03-validation/audits/sprint-3.0.md).~~ **Feito** (secção **Smoke E2E manual** + §7.2 no relatório).
+2. ~~**Sprint 4.0 documental** — dossiê final [`docs/00-start/final-delivery.md`](docs/00-start/final-delivery.md).~~ **Feito** (sessão 18 deste HANDOFF).
+3. Aceite humano das **Sprints 2.1 + 2.2 + 2.2-B + 2.3** (§10/§11 dos respectivos relatórios — podem ser aceitos em conjunto). **3.0 / 3.0-A:** aceite técnico consolidado no relatório; papel formal opcional.
+4. **Architect/Documentation** — `executive-overview.md` (pendência histórica consolidando 2.2 + 2.2-B + 2.3 + 3.0 + 3.0-A; `final-delivery.md` já cobre entrega para gestores).
+5. **Pós-4.0 (produto)** — polimento final / UX (assets visuais finais via IA + vetorização, testes automatizados de UI, paginação do ranking, URL bookmarkable se necessário). Paralelo: backlog **engine/UX** `apply_secret_choice`.
 
 ## Pendências abertas
 
-- Aceites humanos burocráticos onde o processo exigir (0.3 / 0.3‑A / 1.2 / **2.1 §11 papel** / **2.2 §10 papel** / **2.2-B §10 papel** / **2.3 §10 papel**).  
-- Atualização do dossier executivo cobrindo 2.x.  
-- `apply_secret_choice` explícito (engine UX de opção secreta) — backlog de engine/UX; atualmente apenas `inject_secret_event` aparece quando engine retorna secreto (**ainda falta segunda chamada de escolha dedicada secreta conforme roadmap engine**).
-- **Playbook operacional dev local pós-2.2:** se houver `backend/data/*.db` criado em sprint anterior à 2.2, **apagar antes de subir o backend** (`Remove-Item backend\data\*.db`) — `Base.metadata.create_all()` não adiciona a coluna nova `secrets_seen_json` em tabelas existentes. Detalhes: `docs/03-validation/audits/sprint-2.2.md §7.2`.
-- Sprint **3** (UX completa do frontend) e Sprint **4** (regressão narrativa via playthroughs) seguem no plano.
+- Aceites humanos burocráticos onde o processo exigir (0.3 / 0.3‑A / 1.2 / **2.1 §11 papel** / **2.2 §10 papel** / **2.2-B §10 papel** / **2.3 §10 papel**); **3.0 / 3.0-A** — aceite **técnico** no relatório; papel §10 só se o processo exigir duplicata.
+- ~~Smoke E2E manual da Sprint 3.0 (playbook §7.1) — execução pelo humano com backend ativo.~~ **Feito** — ver [`sprint-3.0.md`](docs/03-validation/audits/sprint-3.0.md) secção **Smoke E2E manual**.
+- Atualização do dossier executivo cobrindo 2.x + 3.0 + 3.0-A (complementado por **`docs/00-start/final-delivery.md`**).  
+- `apply_secret_choice` explícito (engine UX de opção secreta) — backlog de engine/UX; atualmente apenas `inject_secret_event` aparece + banner discreto no frontend.
+- **Playbook operacional dev local pós-2.2:** se houver `backend/data/*.db` criado em sprint anterior à 2.2, **apagar antes de subir o backend** (`Remove-Item backend\data\*.db`). Detalhes: `docs/03-validation/audits/sprint-2.2.md §7.2`.
+- **Pós-4.0 (produto):** polimento final / UX (assets visuais finais, testes UI, paginação ranking, URL bookmarkable) — próxima fase **de código/UX**, não confundir com **4.0 documental** (fechada).
 
 ## Links rápidos
 
 | Artefato | Caminho |
 |---------|---------|
-| Linha do tempo | `docs/03-validation/sprint-history.md` |
+| **Dossiê final de entrega (Sprint 4.0 doc)** | `docs/00-start/final-delivery.md` |
 | Aceite backend 0.2 | `docs/03-validation/audits/sprint-0.2.md` |
 | Aceite frontend 0.3 | `docs/03-validation/audits/sprint-0.3.md` |
 | Aceite regras engine 1.0 | `docs/03-validation/audits/sprint-1.0.md` |
@@ -92,6 +313,7 @@ git push -u origin main
 | Aceite choices+engine 2.2 | `docs/03-validation/audits/sprint-2.2.md` |
 | Correções QA 2.2-B (pré-2.3) | `docs/03-validation/audits/sprint-2.2-B.md` |
 | Aceite ranking API 2.3 | `docs/03-validation/audits/sprint-2.3.md` |
+| **Aceite frontend jogável 3.0** | **`docs/03-validation/audits/sprint-3.0.md`** |
 
 ---
 

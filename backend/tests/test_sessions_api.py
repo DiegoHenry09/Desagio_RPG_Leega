@@ -27,6 +27,7 @@ def test_create_session_returns_201_with_initial_state(client: TestClient) -> No
     body = response.json()
     assert body["id"] > 0
     assert body["player_id"] == player_id
+    assert body["player_name"] == "Eve"
     assert body["status"] == "active"
     assert body["current_day"] == 1
     assert body["current_sequence"] == 1
@@ -91,6 +92,7 @@ def test_get_session_returns_snapshot(client: TestClient) -> None:
     body = response.json()
     assert body["id"] == session_id
     assert body["player_id"] == player_id
+    assert body["player_name"] == "Fabio"
     assert body["current_event"]["id"] == "ev_day1_001"
     assert body["attributes"]["energia"] == 7
 

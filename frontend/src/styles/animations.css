@@ -1,0 +1,68 @@
+/*
+ * animations.css — Microanimações + fallback global para reduced-motion.
+ *
+ * Fonte: Referencia_front_RPG/style-guide.md §7 (Motion design) + SKILL.md
+ * "Microanimações CSS de feedback" e "Persona breathing".
+ *
+ * Princípios: animação serve a comunicar estado, não a entreter. Sem bounce,
+ * sem spring, sem overshoot. Duração curta. Sempre reduzível.
+ */
+
+@keyframes cs-attr-pulse-up {
+  0% {
+    box-shadow: 0 0 0 0 var(--accent-positive);
+  }
+  100% {
+    box-shadow: 0 0 0 6px transparent;
+  }
+}
+
+@keyframes cs-attr-pulse-down {
+  0% {
+    box-shadow: 0 0 0 0 var(--accent-negative);
+  }
+  100% {
+    box-shadow: 0 0 0 6px transparent;
+  }
+}
+
+@keyframes cs-breathe {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.005);
+  }
+}
+
+@keyframes cs-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cs-skeleton-pulse {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

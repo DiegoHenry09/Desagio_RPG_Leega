@@ -1,0 +1,103 @@
+.cs-attr-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-muted);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+}
+
+.cs-attr-panel__title {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin: 0 0 12px;
+  text-transform: uppercase;
+}
+
+.cs-attr-panel__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cs-attr-panel__row {
+  align-items: center;
+  border-radius: var(--radius-md);
+  display: grid;
+  gap: 10px;
+  /* Ícone | rótulo (largura do maior rótulo, compartilhada entre linhas) | barra (absorve o espaço flex) | valor (largura fixa p/ alinhar 1–10 + hint) */
+  grid-template-columns: 22px minmax(0, max-content) minmax(0, 1fr) 2.75rem;
+  padding: 4px 6px;
+  transition: background var(--transition-base);
+}
+
+.cs-attr-panel__row--up {
+  animation: cs-attr-pulse-up 600ms ease-out forwards;
+}
+
+.cs-attr-panel__row--down {
+  animation: cs-attr-pulse-down 600ms ease-out forwards;
+}
+
+.cs-attr-panel__icon {
+  align-items: center;
+  display: inline-flex;
+  height: 22px;
+  justify-content: center;
+  width: 22px;
+}
+
+.cs-attr-panel__label {
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cs-attr-panel__bar {
+  background: var(--bg-muted);
+  border-radius: var(--radius-full);
+  box-sizing: border-box;
+  display: block;
+  height: 8px;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.cs-attr-panel__bar-fill {
+  border-radius: var(--radius-full);
+  display: block;
+  height: 100%;
+  transition: width var(--transition-slow);
+}
+
+.cs-attr-panel__value {
+  box-sizing: border-box;
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  justify-self: end;
+  min-width: 100%;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.cs-attr-panel__hint {
+  color: var(--accent-anxiety);
+  flex-shrink: 0;
+  font-size: 11px;
+  line-height: 1;
+  margin-left: 2px;
+}

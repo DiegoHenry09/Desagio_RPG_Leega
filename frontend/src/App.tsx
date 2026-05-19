@@ -1,56 +1,120 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+
+import type { SessionResponse } from './api/types'
+import EndingPage from './pages/EndingPage'
+import GamePage from './pages/GamePage'
+import HomePage from './pages/HomePage'
+import PlayerProfilePage from './pages/PlayerProfilePage'
+import RankingPage from './pages/RankingPage'
+
 import './App.css'
 
-type ApiState = 'checking' | 'ok' | 'error'
+type View =
+  | { name: 'home' }
+  | { name: 'game'; session: SessionResponse }
+  | { name: 'ending'; session: SessionResponse }
+  | { name: 'ranking' }
+  | { name: 'player-profile'; playerId: number }
 
-const HEALTHCHECK_PATH = '/api/health'
-const HEALTHCHECK_TARGET = 'http://localhost:8000/api/health'
-
+/**
+ * Orquestrador de telas por estado (sem react-router por escolha explícita
+ * da Sprint 3.0 — escopo mínimo, sem URL bookmarkable).
+ *
+ * Estados:
+ *   home    → HomePage (entrada / continuar / ranking)
+ *   game    → GamePage (loop principal de escolha)
+ *   ending  → EndingPage (resultado da sessão)
+ *   ranking        → RankingPage (leaderboard global)
+ *   player-profile → histórico/estatísticas por jogador
+ */
 function App() {
-  const [apiState, setApiState] = useState<ApiState>('checking')
+  const [view, setView] = useState<View>({ name: 'home' })
 
-  useEffect(() => {
-    let isMounted = true
+  function goHome() {
+    setView({ name: 'home' })
+  }
 
-    async function checkApi() {
-      try {
-        const response = await fetch(HEALTHCHECK_PATH)
-        const payload = (await response.json()) as { status?: string }
-
-        if (isMounted) {
-          setApiState(response.ok && payload.status === 'ok' ? 'ok' : 'error')
-        }
-      } catch {
-        if (isMounted) {
-          setApiState('error')
-        }
-      }
+  function goGame(session: SessionResponse) {
+    if (session.status === 'finished') {
+      setView({ name: 'ending', session })
+    } else {
+      setView({ name: 'game', session })
     }
+  }
 
-    void checkApi()
+  function goEnding(session: SessionResponse) {
+    setView({ name: 'ending', session })
+  }
 
-    return () => {
-      isMounted = false
-    }
-  }, [])
+  function goRanking() {
+    setView({ name: 'ranking' })
+  }
+
+  function goPlayerProfile(playerId: number) {
+    setView({ name: 'player-profile', playerId })
+  }
 
   return (
-    <main className="app-shell">
-      <section className="hero-card" aria-labelledby="app-title">
-        <p className="eyebrow">Sprint 0.3</p>
-        <h1 id="app-title">Corporate Survivor</h1>
-        <p className="subtitle">
-          Frontend healthcheck minimo com Vite, React e TypeScript.
-        </p>
-        <p className={`api-status api-status--${apiState}`} aria-live="polite">
-          API:{' '}
-          {apiState === 'checking' && 'verificando'}
-          {apiState === 'ok' && 'ok'}
-          {apiState === 'error' && 'indisponivel'}
-        </p>
-        <p className="api-url">GET {HEALTHCHECK_TARGET}</p>
-      </section>
-    </main>
+    <div className="app-shell">
+      <header className="app-shell__header">
+        <div className="app-shell__header-inner">
+          <span className="app-shell__brand">Corporate Survivor</span>
+          {view.name === 'game' || view.name === 'ending' ? (
+            <span className="app-shell__player" title="Jogador">
+              {view.session.player_name}
+            </span>
+          ) : null}
+          <div className="app-shell__nav">
+            <button type="button" onClick={goHome}>
+              Início
+            </button>
+            <button type="button" onClick={goRanking}>
+              Ranking
+            </button>
+          </div>
+        </div>
+      </header>
+      <main className="app-shell__main">
+        <div className="app-shell__main-inner">
+          {view.name === 'home' ? (
+            <HomePage
+              onStarted={goGame}
+              onResume={goGame}
+              onShowEnding={goEnding}
+              onShowRanking={goRanking}
+            />
+          ) : null}
+          {view.name === 'game' ? (
+            <GamePage
+              initialSession={view.session}
+              onFinished={goEnding}
+              onBackHome={goHome}
+              onShowRanking={goRanking}
+            />
+          ) : null}
+          {view.name === 'ending' ? (
+            <EndingPage
+              session={view.session}
+              onViewRanking={goRanking}
+              onNewJourney={goHome}
+            />
+          ) : null}
+          {view.name === 'ranking' ? (
+            <RankingPage onBack={goHome} onOpenPlayer={goPlayerProfile} />
+          ) : null}
+          {view.name === 'player-profile' ? (
+            <PlayerProfilePage
+              playerId={view.playerId}
+              onBack={goRanking}
+              onHome={goHome}
+            />
+          ) : null}
+        </div>
+      </main>
+      <footer className="app-shell__footer">
+        Mini RPG corporativo — Sprint 3.0. Backend é fonte da verdade.
+      </footer>
+    </div>
   )
 }
 

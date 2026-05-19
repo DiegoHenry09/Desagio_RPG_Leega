@@ -1,0 +1,241 @@
+.cs-player-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0 auto;
+  max-width: 720px;
+}
+
+.cs-player-profile__toolbar {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.cs-player-profile__back,
+.cs-player-profile__home {
+  background: transparent;
+  border: 1px solid var(--bg-muted);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  transition:
+    border-color var(--transition-base),
+    color var(--transition-base);
+}
+
+.cs-player-profile__back:hover,
+.cs-player-profile__home:hover {
+  border-color: var(--corp-blue);
+  color: var(--corp-blue);
+}
+
+.cs-player-profile__status {
+  color: var(--text-secondary);
+  font-size: 14px;
+  padding: 24px 0;
+  text-align: center;
+}
+
+.cs-player-profile__status--error {
+  color: var(--accent-negative);
+}
+
+.cs-player-profile__header {
+  border-bottom: 1px solid var(--bg-muted);
+  padding-bottom: 12px;
+}
+
+.cs-player-profile__title {
+  margin: 0;
+}
+
+.cs-player-profile__subtitle {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin: 8px 0 0;
+}
+
+.cs-player-profile__stats {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.cs-player-profile__stat-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-muted);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
+}
+
+.cs-player-profile__stat-label {
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cs-player-profile__stat-value {
+  color: var(--corp-blue);
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.cs-player-profile__endings h3,
+.cs-player-profile__runs h3 {
+  font-size: 15px;
+  margin: 0 0 10px;
+}
+
+.cs-player-profile__ending-list {
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-muted);
+  border-radius: var(--radius-lg);
+  list-style: none;
+  margin: 0;
+  padding: 12px 16px;
+}
+
+.cs-player-profile__ending-list li {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+.cs-player-profile__ending-count {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.cs-player-profile__empty {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.cs-player-profile__run-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cs-player-profile__run {
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-muted);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+}
+
+.cs-player-profile__run-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cs-player-profile__run-ending {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.cs-player-profile__run-meta {
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  gap: 12px;
+}
+
+.cs-player-profile__run-choices-count {
+  font-variant-numeric: tabular-nums;
+}
+
+.cs-player-profile__toggle {
+  align-self: flex-start;
+  background: transparent;
+  border: none;
+  color: var(--corp-blue);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.cs-player-profile__choices-status {
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin: 12px 0 0;
+  padding-left: 2px;
+}
+
+.cs-player-profile__choices-status--error {
+  color: var(--accent-negative);
+}
+
+.cs-player-profile__choices {
+  border-top: 1px solid var(--bg-muted);
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 12px 0 0;
+}
+
+.cs-player-profile__choices li {
+  align-items: baseline;
+  display: grid;
+  font-size: 13px;
+  gap: 8px 12px;
+  grid-template-columns: 24px minmax(0, 1fr) auto auto;
+  padding: 6px 0;
+}
+
+.cs-player-profile__choice-idx {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.cs-player-profile__choice-ev {
+  background: var(--bg-base);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  overflow: hidden;
+  padding: 2px 6px;
+  text-overflow: ellipsis;
+}
+
+.cs-player-profile__choice-opt {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.cs-player-profile__choice-day {
+  color: var(--text-muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .cs-player-profile__choices li {
+    grid-template-columns: 20px 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .cs-player-profile__choice-opt,
+  .cs-player-profile__choice-day {
+    grid-column: 2;
+  }
+}

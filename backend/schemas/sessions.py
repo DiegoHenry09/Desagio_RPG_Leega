@@ -76,6 +76,8 @@ class SessionResponse(BaseModel):
 
     id: int
     player_id: int
+    #: Nome público do jogador (mesmo valor persistido em `Player.name`).
+    player_name: str
     status: str  # "active" | "finished"
     current_day: int
     current_sequence: int

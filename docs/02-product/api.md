@@ -1,6 +1,6 @@
 # API HTTP — Corporate Survivor
 
-**Estado:** Sprint 2.1 (Player + Sessão inicial) + Sprint 2.2 (`POST …/choices` integrado à engine) + Sprint 2.3 (`GET /api/ranking`).
+**Estado:** Sprint 2.1–2.3 + perfil/histórico do jogador (`GET /api/players/...`).
 
 Prefixo base: `/api`.
 
@@ -36,6 +36,8 @@ Códigos:
 | Método | Caminho | Estado | Descrição |
 |--------|---------|--------|-----------|
 | `POST` | `/api/players` | **Implementado (2.1).** | `{ "name": string (1..64) }`. `201`: `{ id, name, created_at }`. Nome pode repetir entre Players. |
+| `GET` | `/api/players/{player_id}/profile` | **Implementado.** | Perfil público: agregados + lista de partidas finalizadas que entraram no ranking. `404` se `player_id` inexistente. |
+| `GET` | `/api/players/{player_id}/runs/{ranking_entry_id}/choices` | **Implementado.** | Timeline de escolhas (`event_id`, `option_id`, dia/seq.) para uma entrada de ranking **desse** jogador. `404` se jogador, entrada inexistente ou entrada não pertencer ao jogador. |
 | `POST` | `/api/sessions` | **Implementado (2.1).** | `{ "player_id": int > 0 }`. `201`: snapshot `SessionResponse`. |
 | `GET` | `/api/sessions/{id}` | **Implementado (2.1 + 2.2).** | Snapshot completo. `inject_secret_event` é sempre `null` no GET — só é preenchido imediatamente após alguns POST `/choices`. |
 | `POST` | `/api/sessions/{id}/choices` | **Implementado (2.2).** | `{ "event_id": string, "option_id": "A"|"B"|"C"|"D" }`. `200`: snapshot atualizado; `RankingEntry` criada ao terminar sessão (`status=finished`). |
@@ -48,6 +50,7 @@ Campos principais incluem estado da sessão, `attributes`, `current_event` (slot
 {
   "id": 1,
   "player_id": 1,
+  "player_name": "Bruno",
   "status": "active",
   "current_day": 1,
   "current_sequence": 2,
@@ -81,6 +84,7 @@ Envelope `{items, limit, count}`. Itens ordenados por `score` desc; tie-break `c
   "items": [
     {
       "id": 12,
+      "player_id": 3,
       "player_name": "Bruno",
       "score": 551,
       "ending_id": "trainee_lenda",
@@ -88,6 +92,7 @@ Envelope `{items, limit, count}`. Itens ordenados por `score` desc; tie-break `c
     },
     {
       "id": 7,
+      "player_id": 5,
       "player_name": "Cris",
       "score": 280,
       "ending_id": "sobrevivente",
@@ -99,11 +104,57 @@ Envelope `{items, limit, count}`. Itens ordenados por `score` desc; tie-break `c
 }
 ```
 
-> **Invariante de privacidade:** o response do ranking **não** expõe `session_id` (chave estrangeira interna). O cliente recebe apenas o necessário para renderizar a lista pública: `id` da entrada, `player_name`, `score`, `ending_id`, `created_at`.
+> **Privacidade:** o response **não** expõe `session_id`. Expõe **`player_id`** para permitir navegação ao perfil/histórico sem ambiguidade quando há nomes repetidos.
 
 > **Observação:** o `score` e o `ending_id` retornados são exatamente os valores calculados pela engine ao final da partida (`backend/engine/endings.py::compute_score`) e persistidos via `RankingEntry`. O endpoint **não recalcula nada** — é leitura pura.
 
 > **Sem paginação cursor/offset nesta sprint** (escopo proibido). O envelope foi pensado para evolução futura sem quebrar contrato.
+
+### Schema `PlayerProfileResponse`
+
+Agregados apenas sobre partidas que geraram linha no ranking (`RankingEntry`). Leitura pura — sem recalcular score na API.
+
+```jsonc
+{
+  "player_id": 3,
+  "player_name": "Bruno",
+  "stats": {
+    "games_played": 2,
+    "best_score": 551,
+    "avg_score": 415.5
+  },
+  "ending_counts": {
+    "sobrevivente": 1,
+    "trainee_lenda": 1
+  },
+  "runs": [
+    {
+      "ranking_entry_id": 12,
+      "score": 551,
+      "ending_id": "trainee_lenda",
+      "created_at": "2026-05-14T18:23:11.412",
+      "choices_count": 14
+    }
+  ]
+}
+```
+
+### Schema `PlayerRunChoicesResponse`
+
+```jsonc
+{
+  "ranking_entry_id": 12,
+  "choices": [
+    {
+      "event_id": "ev_day1_001",
+      "option_id": "A",
+      "day": 1,
+      "sequence": 1,
+      "created_at": "2026-05-14T18:20:00.000"
+    }
+  ]
+}
+```
 
 ## Restart
 

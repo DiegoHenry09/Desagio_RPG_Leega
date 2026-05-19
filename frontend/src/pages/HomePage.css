@@ -1,0 +1,151 @@
+.cs-home {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0 auto;
+  max-width: 720px;
+  padding: 32px 0;
+}
+
+.cs-home__hero {
+  text-align: center;
+}
+
+.cs-home__eyebrow {
+  color: var(--corp-blue);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.cs-home__title {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.cs-home__subtitle {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.55;
+  margin: 0 auto;
+  max-width: 540px;
+}
+
+.cs-home__resume {
+  align-items: center;
+  background: var(--bg-surface);
+  border: 1px solid var(--corp-blue-light);
+  border-left: 4px solid var(--corp-blue);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  padding: 16px 20px;
+}
+
+.cs-home__resume-eyebrow {
+  color: var(--corp-blue);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.cs-home__resume-progress {
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.cs-home__resume-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.cs-home__form {
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-muted);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+}
+
+.cs-home__label {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cs-home__input {
+  background: var(--bg-base);
+  border: 2px solid var(--bg-muted);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  padding: 12px 14px;
+  transition: border-color var(--transition-base);
+}
+
+.cs-home__input:focus {
+  border-color: var(--corp-blue);
+  outline: none;
+}
+
+.cs-home__error {
+  color: var(--accent-negative);
+  font-size: 13px;
+}
+
+.cs-home__form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.cs-home__btn {
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 11px 18px;
+  transition: background var(--transition-base);
+}
+
+.cs-home__btn--primary {
+  background: var(--corp-blue);
+  border: 2px solid var(--corp-blue);
+  color: var(--text-on-dark);
+}
+
+.cs-home__btn--primary:hover:not(:disabled) {
+  background: var(--corp-blue-hover);
+  border-color: var(--corp-blue-hover);
+}
+
+.cs-home__btn--primary:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.cs-home__btn--ghost {
+  background: transparent;
+  border: 2px solid var(--bg-muted);
+  color: var(--text-secondary);
+}
+
+.cs-home__btn--ghost:hover:not(:disabled) {
+  border-color: var(--corp-blue);
+  color: var(--corp-blue);
+}

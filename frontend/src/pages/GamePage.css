@@ -1,0 +1,269 @@
+.cs-game {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0 auto;
+  max-width: 1024px;
+}
+
+.cs-game__topbar {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.cs-game__progress-wrap {
+  display: flex;
+  flex: 1 1 280px;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.cs-game__progress {
+  align-items: baseline;
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-muted);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  display: inline-flex;
+  font-size: 13px;
+  gap: 6px;
+  padding: 6px 14px;
+}
+
+.cs-game__progress-label {
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cs-game__progress-value {
+  color: var(--corp-blue);
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.cs-game__progress-sep {
+  color: var(--text-muted);
+}
+
+.cs-game__progress-total {
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.cs-game__progress-weekday {
+  border-left: 1px solid var(--bg-muted);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 6px;
+  max-width: 140px;
+  overflow: hidden;
+  padding-left: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .cs-game__progress-weekday {
+    display: none;
+  }
+}
+
+.cs-game__progress-seq {
+  border-left: 1px solid var(--bg-muted);
+  color: var(--text-secondary);
+  margin-left: 6px;
+  padding-left: 10px;
+}
+
+.cs-game__week-strip {
+  display: flex;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cs-game__week-day {
+  background: var(--bg-muted-soft);
+  border: 1px solid var(--bg-muted);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: 6px 4px;
+  text-align: center;
+}
+
+.cs-game__week-day--current {
+  background: var(--bg-surface);
+  border-color: var(--corp-blue);
+  color: var(--corp-blue);
+}
+
+.cs-game__week-day-short {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.cs-game__week-day-num {
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.cs-game__week-day--current .cs-game__week-day-num {
+  color: var(--text-primary);
+  opacity: 1;
+}
+
+.cs-game__topbar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.cs-game__link {
+  background: transparent;
+  border: 1px solid var(--bg-muted);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  transition: border-color var(--transition-base), color var(--transition-base);
+}
+
+.cs-game__link:hover {
+  border-color: var(--corp-blue);
+  color: var(--corp-blue);
+}
+
+.cs-game__layout {
+  display: grid;
+  gap: 16px;
+  grid-template-areas:
+    'stage stage'
+    'event sidebar';
+  grid-template-columns: 1fr 280px;
+}
+
+.cs-game__layout > :nth-child(1) {
+  grid-area: stage;
+}
+
+.cs-game__event {
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-muted);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  grid-area: event;
+  padding: 24px;
+}
+
+.cs-game__event-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.cs-game__dialogue {
+  background: var(--bg-muted-soft);
+  border: 1px solid var(--bg-muted);
+  border-left: 4px solid var(--corp-blue);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px 16px;
+  position: relative;
+}
+
+.cs-game__dialogue-badge {
+  align-self: flex-start;
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-muted);
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 3px 8px;
+  text-transform: uppercase;
+}
+
+.cs-game__dialogue-speaker {
+  color: var(--corp-blue);
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.cs-game__dialogue-scene {
+  color: var(--text-primary);
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 0;
+  white-space: pre-line;
+}
+
+.cs-game__event-bridge {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.cs-game__event-bridge strong {
+  color: var(--text-primary);
+}
+
+.cs-game__sidebar {
+  grid-area: sidebar;
+}
+
+.cs-game__empty {
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-muted);
+  border-radius: var(--radius-lg);
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  text-align: center;
+}
+
+.cs-game__error {
+  background: var(--bg-muted-soft);
+  border: 1px solid var(--accent-negative);
+  border-left: 4px solid var(--accent-negative);
+  border-radius: var(--radius-md);
+  color: var(--accent-negative);
+  font-size: 14px;
+  padding: 12px 14px;
+}
+
+@media (max-width: 900px) {
+  .cs-game__layout {
+    grid-template-areas:
+      'stage'
+      'sidebar'
+      'event';
+    grid-template-columns: 1fr;
+  }
+}

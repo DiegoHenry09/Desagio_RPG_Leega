@@ -1,0 +1,122 @@
+.cs-ranking {
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-muted);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+.cs-ranking__title {
+  margin-bottom: 16px;
+}
+
+.cs-ranking__empty {
+  color: var(--text-secondary);
+  font-size: 14px;
+  padding: 12px 0;
+}
+
+.cs-ranking__list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cs-ranking__head,
+.cs-ranking__row {
+  align-items: center;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 36px minmax(120px, 1.4fr) minmax(160px, 1.6fr) 96px 72px;
+  padding: 10px 12px;
+}
+
+.cs-ranking__head {
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cs-ranking__row {
+  background: var(--bg-base);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.cs-ranking__row[data-ending='trainee_lenda'] {
+  border-left: 3px solid var(--accent-positive);
+}
+.cs-ranking__row[data-ending='promessa'] {
+  border-left: 3px solid var(--accent-learn);
+}
+.cs-ranking__row[data-ending='sobrevivente'] {
+  border-left: 3px solid var(--text-muted);
+}
+.cs-ranking__row[data-ending='burnout'],
+.cs-ranking__row[data-ending='demitido'],
+.cs-ranking__row[data-ending='risco_op'] {
+  border-left: 3px solid var(--accent-negative);
+}
+.cs-ranking__row[data-ending='invisivel'] {
+  border-left: 3px solid var(--text-secondary);
+}
+
+.cs-ranking__rank {
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.cs-ranking__name {
+  font-weight: 600;
+}
+
+.cs-ranking__name-btn {
+  background: none;
+  border: none;
+  color: var(--corp-blue);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  padding: 0;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.cs-ranking__name-btn:hover {
+  color: var(--corp-blue);
+  filter: brightness(1.15);
+}
+
+.cs-ranking__ending {
+  color: var(--text-secondary);
+}
+
+.cs-ranking__date {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.cs-ranking__score {
+  color: var(--corp-blue);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  text-align: right;
+}
+
+@media (max-width: 720px) {
+  .cs-ranking__head,
+  .cs-ranking__row {
+    grid-template-columns: 28px minmax(80px, 1.2fr) minmax(120px, 1.6fr) 60px;
+  }
+  .cs-ranking__date {
+    display: none;
+  }
+}

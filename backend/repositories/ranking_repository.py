@@ -8,8 +8,9 @@ engine (`compute_score` em `backend/engine/endings.py`).
 from __future__ import annotations
 
 from sqlalchemy import select
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, selectinload
 
+from models.game_session import GameSession
 from models.ranking_entry import RankingEntry
 
 
@@ -36,11 +37,30 @@ def top_n(db: Session, n: int = 10) -> list[RankingEntry]:
     """Top-N ordenado por score desc, desempate por created_at asc, id asc."""
     stmt = (
         select(RankingEntry)
+        .options(selectinload(RankingEntry.session))
         .order_by(
             RankingEntry.score.desc(),
             RankingEntry.created_at.asc(),
             RankingEntry.id.asc(),
         )
         .limit(n)
+    )
+    return list(db.execute(stmt).scalars().all())
+
+
+def list_for_player_profile(db: Session, player_id: int) -> list[RankingEntry]:
+    """Todas as entradas de ranking do jogador, mais recentes primeiro.
+
+    Carrega sessão + decisões para contagem de escolhas por partida (somente
+    leitura — não recalcula score nem estado).
+    """
+    stmt = (
+        select(RankingEntry)
+        .join(GameSession, RankingEntry.session_id == GameSession.id)
+        .where(GameSession.player_id == player_id)
+        .options(
+            selectinload(RankingEntry.session).selectinload(GameSession.decisions),
+        )
+        .order_by(RankingEntry.created_at.desc(), RankingEntry.id.desc())
     )
     return list(db.execute(stmt).scalars().all())

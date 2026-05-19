@@ -1,0 +1,36 @@
+.cs-ranking-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0 auto;
+  max-width: 960px;
+}
+
+.cs-ranking-page__back {
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid var(--bg-muted);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  transition: border-color var(--transition-base), color var(--transition-base);
+}
+
+.cs-ranking-page__back:hover {
+  border-color: var(--corp-blue);
+  color: var(--corp-blue);
+}
+
+.cs-ranking-page__status {
+  color: var(--text-secondary);
+  font-size: 14px;
+  padding: 24px 0;
+  text-align: center;
+}
+
+.cs-ranking-page__status--error {
+  color: var(--accent-negative);
+}
